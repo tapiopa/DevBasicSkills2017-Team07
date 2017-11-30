@@ -79,6 +79,74 @@ function numbersystable( action ) {
 
 }
 
+function setselector( element_count, set_name ) {
+        var indexer;
+        var elements = document.getElementById( "elements_to_select" );
+        var elements_string = "";
+
+        elements_string = "Select number of elements from set " + set_name + "<select id='number_to_pick'>";
+
+        for ( indexer = 1; indexer <= element_count; indexer++ ) {
+                elements_string += "<option value=" + indexer + ">" + indexer + "</option>";
+        }
+        console.log( "Elements string = " + elements_string );
+        elements_string += "</select>";
+        console.log( "Elements again = " + elements_string );
+        elements.innerHTML = elements_string;
+}
 
 
+function change_button_state( value, buttons_to_change ) {
+        var indexer;
+        var state;
 
+        if ( value == "1" ) {
+                state = false;
+        }
+        else {
+                state = true;
+        }
+
+        for ( indexer = 0; indexer < buttons_to_change.length; indexer++ ) {
+                document.getElementById( buttons_to_change[ indexer ] ).disabled = state; 
+        }
+}
+
+function do_the_math() {
+        var combinations = document.getElementById( "combination" ).checked;
+        var permutations = document.getElementById( "permutation" ).checked;
+        var replacements;
+        var number_to_pick = document.getElementById( "number_to_pick" ).value;
+        var set_A = ["1", "2", "3", "4"];
+        var set_B = ["a", "b", "c", "d", "e"];
+        var set_C = ["!", '"', "#", "$", "%", "&"];
+
+        if ( document.getElementById( "replacement" ).checked ) {
+                replacements = true;
+        }
+        else if ( document.getElementById( "no_replacement" ).checked ) { 
+                replacements = false;
+        }
+
+        if ( combinations ) {
+                do_combinations();
+        }
+        else if ( permutations ) {
+                do_permutations();
+        }
+        else {
+                console.log( "Something went wrong. Nothing to calculate" );
+        }
+        console.log( " Combs  = " + combinations.checked );
+        console.log( " Perms = " + permutations.checked );
+        console.log( " Replacements = " + replacements );
+        console.log( " How many elements = " + number_to_pick );
+}
+
+function do_combinations() {
+        console.log( "We're doing combinations!" );
+}
+
+function do_permutations() {
+        console.log( "We're doing permutations!" );
+}

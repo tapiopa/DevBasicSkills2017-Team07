@@ -4,20 +4,30 @@
         <script type="text/javascript" src="scripts/ownscripts.js"></script>
     </head>
     <body>
-        Enter your set here (separate elements with comma):
+        Pick one of these sets: 
         <div>
-            <textarea></textarea>
+            <p>
+           A = { 1, 2, 3, 4 }  B =  {a, b, c, d, e} and C = {!, ", #, $, %, &}
+            </p>
         </div>
         <div>
-            <input type="range" min="1" max="50" value="25" class="slider" id="range">
+            <button class="button_group" onclick='setselector( 4, "A" ),change_button_state( 1, ["combination", "permutation"] )'>Select A</button>
+            <button class="button_group" onclick='setselector( 5, "B" ),change_button_state( 1, ["combination", "permutation"] )'>Select B</button>
+            <button class="button_group" onclick='setselector( 6, "C" ),change_button_state( 1, ["combination", "permutation"] )'>Select C</button>
         </div>
-        <div class="radio_button">
-            <input type="radio" name="comb_type" value="combinations">Combinations
-            <input type="radio" name="comb_type" value="permutations">Permutations
+        Calculate
+        <div class="radio_button" id="type_select">
+            <input type="radio" id="combination" name="comb_type" value="combinations" disabled onclick="change_button_state( 0, ['replacement', 'no_replacement']), change_button_state( 1, ['calculate']) ">Combinations
+            <input type="radio" id="permutation" name="comb_type" value="permutations" disabled onclick="change_button_state( 1, ['replacement', 'no_replacement']), change_button_state( 0, ['calculate'])">Permutations
         </div>
-        <div class="radio_button">
-            <input type="radio" name="perm_type" value="replacement">Replacement
-            <input type="radio" name="perm_type" value="no_replacement">No replacement
+        <div id="elements_to_select">
+        No set selected!
         </div>
+        Calculate permutations with 
+        <div class="radio_button" id="permutation_buttons">
+            <input type="radio" name="perm_type" value="replacement" disabled id="replacement" onclick="change_button_state( 1, ['calculate'])">Replacement
+            <input type="radio" name="perm_type" value="no_replacement" disabled id="no_replacement" onclick="change_button_state( 1, ['calculate'])">No replacement
+        </div>
+        <button class="button_group" onclick="do_the_math()" disabled id="calculate">Calculate!</button>
     </body>
 </html>
