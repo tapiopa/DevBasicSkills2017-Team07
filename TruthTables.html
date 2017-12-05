@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Truth Tables</title>
+	
+	<script src="js/truthtables.js"></script>
+</head>
+<body onload="fillTruths()">
+	<button id="negation" onclick="doNot()">&not;</button>
+	<button id="and" onclick="doAnd()">&and;</button>
+	<button id="or" onclick="doOr()">&or;</button>
+	<button id="xor" onclick="doXor()">&oplus;</button>
+	<button id="implication" onclick="doImplication()">&rArr;</button>
+	<button id="equivalence" onclick="doEquivalence()">&hArr;</button>
+	<table>
+		<caption></caption>
+		<thead>
+			<tr>
+				<th>p</th>
+				<th>q</th>
+				<th id="operation">x</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<td></td>
+			</tr>
+		</tfoot>
+		<tbody>
+			<tr>
+				<td id="p1">p1</td>
+				<td id="q1">q1</td>
+				<td id="o1">o1</td>
+			</tr>
+			<tr>
+				<td id="p2">p2</td>
+				<td id="q2">q2</td>
+				<td id="o2">o2</td>
+			</tr>
+			<tr>
+				<td id="p3">p3</td>
+				<td id="q3">q3</td>
+				<td id="o3">o3</td>
+			</tr>
+			<tr>
+				<td id="p4">p4</td>
+				<td id="q4">q4</td>
+				<td id="o4">o4</td>
+			</tr>
+		</tbody>
+	</table>
+	
+</body>
+</html>

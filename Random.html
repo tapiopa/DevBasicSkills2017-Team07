@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/random.css">
+	<title>Random Distributions</title>
+	<script src="js/Chart.bundle.js"></script>
+	<script src="js/random.js" charset="utf-8">	</script>
+</head>
+<body>
+	
+	<label for="floor">Minimum Value</label><input id="floor" type="number" name="floor" value="0">
+	<label for="ceiling">Maximum Value</label><input id="ceiling" type="number" name="ceiling" value="0">
+	<label for="rounds">Number of Random Numbers</label><input id="rounds" type="number" name="rounds" value="0">
+	<label for="type">Number Type</label><input id="integer" type="radio" name="type">Integer
+	<input id="float" type="radio" name="type">Float</input>
+	<button id="go" onclick="createChart()">Go</button>
+	<div id="test"></div>
+	<canvas id="myChart" width="100" height="100" style="border: red 3px solid"></canvas>
+
+</body>
+</html>
