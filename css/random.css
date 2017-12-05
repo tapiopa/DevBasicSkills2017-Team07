@@ -1,0 +1,14 @@
+canvas {
+	width: 450px !important;
+	height: 300px !important;	
+}
+
+div.rand {
+	width: 100px;
+	float: left;
+}
+
+div.rand input {
+	float: right;
+	width: 50px;
+}
