@@ -5,7 +5,6 @@ function getroots() {
         var constant_coef = document.getElementById( "constant_dgr" ).value;
         var solution_field = document.getElementById( "solution" );
 
-        console.log( "Second degree = " + second_dgr_coef + "\n First degree = " + first_dgr_coef + "\n Constant = " + constant_coef);
         
         var determinant = first_dgr_coef * first_dgr_coef - ( 4 * second_dgr_coef * constant_coef );
         var determinant_root; 
@@ -29,7 +28,6 @@ function getroots() {
                roots.push( determinant_root / ( 2 * first_dgr_coef ) );
 
                solution_field.innerHTML = "$$ x = \\begin{cases} &" + roots[0] + " + " + Math.abs( roots[1] ) + "i \\"+"\\ \\ &" + roots[0] + " - " + Math.abs( roots[1] ) + "i \\end{cases} $$";
-               console.log( "Solution field = " + solution_field.innerHTML );
        }
        else {
                roots.push( (( -first_dgr_coef ) + determinant_root ) / ( 2 * second_dgr_coef ) ); 
@@ -41,7 +39,6 @@ function getroots() {
                else {
                        solution_field.innerHTML  = "\\(x = " + roots[0] + "\\)";
                }
-               console.log( "Solution field = " + solution_field.innerHTML );
        } 
 
 }
@@ -50,7 +47,6 @@ function numbersystable( action ) {
         var indexer;
         var numbers_in_table = [];
         var table = document.getElementById( "number_table" );
-        console.log( "Table values = " + table.title );
 
         if ( action && table.title == "empty" ) {
                 
@@ -67,7 +63,6 @@ function numbersystable( action ) {
                         table.innerHTML += "<tr> <td> " + numbers_in_table[ indexer] + " </td>  <td>" + numbers_in_table[ indexer + 1] + "</td> <td>" + numbers_in_table[ indexer + 2] + "</td> <td> " +numbers_in_table[ indexer + 3] + "</td> </tr>";
                 }
 
-                console.log( " InnerHTML = " + table.innerHTML );
                 table.title = "full";
 
         }
@@ -89,9 +84,7 @@ function setselector( element_count, set_name ) {
         for ( indexer = 1; indexer <= element_count; indexer++ ) {
                 elements_string += "<option value=" + indexer + ">" + indexer + "</option>";
         }
-        console.log( "Elements string = " + elements_string );
         elements_string += "</select>";
-        console.log( "Elements again = " + elements_string );
         elements.innerHTML = elements_string;
 }
 
@@ -149,11 +142,6 @@ function do_the_math() {
         else {
                 console.log( "Something went wrong. Nothing to calculate" );
         }
-        console.log( " Combs  = " + combinations );
-        console.log( " Perms = " + permutations );
-        console.log( " Replacements = " + replacements );
-        console.log( " How many elements = " + number_to_pick );
-        console.log( " Which set we're working on: " + which_set );
 }
 
 function do_combinations( set_name, sample_size ) {
@@ -162,12 +150,7 @@ function do_combinations( set_name, sample_size ) {
         var answer = "";
         var number_of_combinations = factorial( set_name.length ) / ( factorial( sample_size ) * factorial( set_name.length - sample_size ) );
 
-        console.log(" Set length " + set_name.length );
-
-        console.log( "We're doing combinations!" );
-        console.log( "Working on " + set_name );
         document.getElementById( "results" ).innerHTML = "Number of combinations of length " + sample_size + " is " + number_of_combinations + "<br>";
-        console.log( "Factorial of sample size = " + factorial( sample_size ));
         
         if ( set_name.length == sample_size ) {
                 for ( indexer = 0; indexer < sample_size; indexer++ ) {
@@ -179,25 +162,15 @@ function do_combinations( set_name, sample_size ) {
         result = combinations( set_name, sample_size );
         
         for ( indexer = 0; indexer < number_of_combinations; indexer++ ) {
-                console.log( "Result[" + indexer + "]" + result[ indexer ][0] );
                 for ( indexer_2 = 0; indexer_2 < sample_size; indexer_2++ ) {
                         document.getElementById( "results" ).innerHTML += result[ indexer ][ sample_size - 1 - indexer_2 ];
                 }
                 document.getElementById( "results" ).innerHTML += " ";
         }
-
-        console.log("Back to do_combinations " + results );
-
-       // document.getElementById( "results" ).innerHTML += result.toString();   
-
-    
-
-
 }
 
 function combinations( set_name, sample_size ) {
 
-        console.log( " We're here!" );
         var result_set = [];
         var result = [];
 
@@ -218,15 +191,12 @@ function combinations( set_name, sample_size ) {
                         result_set.push( result );
                 }
         }
-        console.log( "Result set is " + result_set );
         return result_set;
 }
 
 
 function do_permutations( set_name, sample_size, replacements ) {
-        console.log( "We're doing permutations!" );
         var indexer, indexer_2 = 0;
-        console.log( "Working on " + set_name );
         var number_of_combinations = factorial( set_name.length ) / ( factorial( sample_size ) * factorial( set_name.length - sample_size ) );
         
         if ( replacements ) {
@@ -237,7 +207,6 @@ function do_permutations( set_name, sample_size, replacements ) {
                               var temporary_string = test_result[ indexer ].toString();
                               var temp_str2 = temporary_string.replace( /,/g, '' );
                               document.getElementById( "results" ).innerHTML += temp_str2 + " ";
-                              console.log( " permutation_results[" + indexer + "]"  + test_result[ indexer ].toString() );
                 }
                 document.getElementById( "results" ).innerHTML += " ";
         }
@@ -249,7 +218,6 @@ function do_permutations( set_name, sample_size, replacements ) {
                 for ( indexer = 0; indexer < number_of_combinations; indexer++ ) {
                         var result = [];
                         result = permutate_noreplacement( result_temp[ indexer ] );
-                        console.log( " Result array is  " + result );
                         
                         for ( indexer_2 = 0; indexer_2 < result.length; indexer_2++ ) {
                                 
@@ -263,8 +231,7 @@ function do_permutations( set_name, sample_size, replacements ) {
 
 
         }
-        
-        console.log( "Factorial of sample size = " + factorial( sample_size ));
+    
 }
 
 function permutate_noreplacement( set_name ) {
@@ -296,13 +263,11 @@ function permutation_replacement( set_name, sample_size ) {
         for ( var indexer_1 = 0; indexer_1 < set_name.length; indexer_1++ ) {
         var result = [];
         result.push( set_name[ indexer_1 ] );
-        console.log( " result is " + result );
 
         for ( var indexer_2 = 0; indexer_2 < set_name.length && sample_size >= 2; indexer_2++ ) {
                 
                 if ( sample_size > 2 && result.length < 2 ) {
                         result.push( set_name[ indexer_2 ] );
-                        console.log("At the level 2 " + result );
                 }
                 else if ( sample_size == 2 && result.length < 2 ){
                         result.push( set_name[ indexer_2 ] );
@@ -322,16 +287,13 @@ function permutation_replacement( set_name, sample_size ) {
                                  result.push( set_name[ indexer_3 ] );
                                  temp_string = result.toString();
                                  permutation_result.push( temp_string);
-                                 console.log( "level3 result before pop " + result );
                                  result.pop();
-                                 console.log( "level3 result = " + result );
                             }
                             else {
                                  result.splice( 2, 1, set_name[ indexer_3 ] );
                             }
                         
                         for ( var indexer_4 = 0; indexer_4 < set_name.length && sample_size >= 4; indexer_4++ ) {
-                                 console.log( "We shouldn't be here" ); 
                                  if ( sample_size > 4  && result.length < 4 ) {
                                       result.push( set_name[ indexer_4 ] );
                                  }
@@ -361,7 +323,7 @@ function permutation_replacement( set_name, sample_size ) {
 
                                         for ( var indexer_6 = 0; indexer_6 < set_name.length && sample_size >= 6; indexer_6++ ) {
                                                           
-                                                result.push( set_name[ indexer_2 ] );
+                                                result.push( set_name[ indexer_6 ] );
                                                      
                                                 temp_string = result.toString();
                                                 permutation_result.push( temp_string);
