@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="scripts/ownscripts.js"></script>
+    </head>
+    <body>
+        Pick one of these sets: 
+        <div>
+            <p>
+           A = { 1, 2, 3, 4 }  B =  {a, b, c, d, e} and C = {!, ", #, $, %, &}
+            </p>
+        </div>
+        <div>
+            <button class="button_group" onclick='setselector( 4, "A" ),change_button_state( 1, ["combination", "permutation"] )'>Select A</button>
+            <button class="button_group" onclick='setselector( 5, "B" ),change_button_state( 1, ["combination", "permutation"] )'>Select B</button>
+            <button class="button_group" onclick='setselector( 6, "C" ),change_button_state( 1, ["combination", "permutation"] )'>Select C</button>
+        </div>
+        Calculate
+        <div class="radio_button" id="type_select">
+            <input type="radio" id="combination" name="comb_type" value="combinations" disabled onclick="change_button_state( 0, ['replacement', 'no_replacement']), change_button_state( 1, ['calculate']) ">Combinations
+            <input type="radio" id="permutation" name="comb_type" value="permutations" disabled onclick="change_button_state( 1, ['replacement', 'no_replacement']), change_button_state( 0, ['calculate'])">Permutations
+        </div>
+        <div id="elements_to_select">
+        No set selected!
+        </div>
+        Calculate permutations with 
+        <div class="radio_button" id="permutation_buttons">
+            <input type="radio" name="perm_type" value="replacement" disabled id="replacement" onclick="change_button_state( 1, ['calculate'])">Replacement
+            <input type="radio" name="perm_type" value="no_replacement" disabled id="no_replacement" onclick="change_button_state( 1, ['calculate'])">No replacement
+        </div>
+        <button class="button_group" onclick="do_the_math()" disabled id="calculate">Calculate!</button>
+    </body>
+</html>
