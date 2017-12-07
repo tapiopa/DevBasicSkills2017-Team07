@@ -1,15 +1,22 @@
 canvas {
-	width: 450px !important;
-	height: 300px !important;	
+	width: 550px !important;
+	height: 500px !important;	
 }
 
 div.rand {
-	width: 130px;
+	/*width: 125px;*/
 	margin-left: 10px;
 	float: left;
+	border: solid green 2px;
 }
 
 div.rand input {
-	float: right;
+	/*float: right;*/
 	width: 50px;
+	margin-left: 10px;
+}
+
+div#randbutton {
+	float: right;
+	border: solid green 2px;
 }

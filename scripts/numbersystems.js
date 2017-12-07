@@ -39,22 +39,38 @@ function convertBinary() {
 	let octput = document.getElementById("octal");
 	let hexput = document.getElementById("hexadecimal");
 	
-	if (isNaN(binput.value)) {
-		alert("Not a valid binary value: " + binput.value + ".");
-		document.getElementById("binary").select();
-		return;
-	}
-	let bin = Number(binput.value);
-	let binstr = bin.toString();
-	let dec = parseInt(bin, 2);
-	//alert(dec);
-	//111111111111111111111
-	if (dec > 2097136 || binstr.length > 21) {
-		alert("Number is too big. Choose a smaller number.");
+	let bin = binput.value;
+	
+	if (isNaN(bin)) {
+		alert("Not a valid binary value: " + bin + ".");
 		document.getElementById("binary").select();
 		return;
 	}
 	
+	let binstr = bin.toString();
+	let dec = parseInt(bin, 2);
+	
+	if (!"-01".includes(binstr[0])) {
+		alert("Not a valid binary value: " + bin + ".");
+		document.getElementById("binary").select();
+		return;
+	}
+
+	for (var i = 1; i < binstr.length; i++) {
+		if ( !"01".includes(binstr[i]) ) {
+			alert("Not a valid binary value: " + bin + ".");
+			document.getElementById("binary").select();
+			return;
+		}
+	}
+
+	if ((binstr.length == 22 && binstr[0] != '-') || 
+		binstr.length > 22) {
+		alert("Number is too big. Choose a smaller number.");
+		document.getElementById("binary").select();
+		return;
+	}
+
 	decput.value = dec;
 	//binput.value = dec.toString(2)
 	octput.value = dec.toString(8);
@@ -68,6 +84,7 @@ function convertBinary() {
 	octput.style.fontWeight = "bold";
 	hexput.style.fontWeight = "bold";
 	document.getElementById("binary").select();
+	
 }
 
 function convertOctal() {
@@ -77,7 +94,7 @@ function convertOctal() {
 	let octput = document.getElementById("octal");
 	let hexput = document.getElementById("hexadecimal");
 	
-	let chrs = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
+	let chrs = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '-'];
 	let oct = Number(octput.value);	
 	let octstr = oct.toString();
 
@@ -120,7 +137,7 @@ function convertHexadecimal() {
 	let hex = hexput.value;
 	let hexstr = hex.toString();
 	
-	let chrs = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F'];
+	let chrs = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', '-'];
 	for (var i = 0; i < hexstr.length; i++) {
 		if (!chrs.includes(hexstr[i])) {
 			alert("Not a valid hexadecimal number: " + hexstr + ". ");

@@ -20,11 +20,12 @@ p#preface {
 }
 .outer-wrap {
     width:100%;
-    max-width:600px;
+    max-width:590px;
     margin: 0 auto;
     margin-left: 0;
     float: right;
     background-color: lightgray;
+    /*border: solid green 2px;*/
 }
 .clear-float {
     clear:both;
@@ -78,4 +79,5 @@ img {
 .ninety-percent-pad {
     width:90%;
     margin:25px auto;
+    /*border: solid red 2px;*/
 }

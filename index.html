@@ -86,10 +86,10 @@
 							</div>
 				        </div><!-- numsyscontents -->
 				        <p class="footertext">
-					        Maximum decimal number: 99999999999<br>
-					        Maximum binary number: 111111111111111111111<br>
-					        Maximum octal number: 7777777777777<br>
-					        Maximum hexadecimal number: fffffffff<br>
+					        Decimal number: -99999999999 – 99999999999<br>
+					        Binary number: -111111111111111111111 – 111111111111111111111<br>
+					        Octal number: -7777777777777 – 7777777777777<br>
+					        Hexadecimal number: -fffffffff – fffffffff<br>
 				        </p>
 			        </div><!-- ninety -->
 			    </div> <!-- Number Systems -->
@@ -160,10 +160,11 @@
 			    <!-- Random Numbers -->
 			    <div id="random" class="tab-page">
 			        <div class="ninety-percent-pad">
-			            <div class="rand"><label for="floor">Minimum</label><input id="floor" type="number" name="floor" value="0" onclick="this.select();"></div>
-						<div class="rand"><label for="ceiling">Maximum</label><input id="ceiling" type="number" name="ceiling" value="100" onclick="this.select();"></div>
-						<div class="rand"><label for="rounds">Quantity</label><input id="rounds" type="number" name="rounds" value="1000" onclick="this.select();"></div>
-						<button id="go" onclick="createChart()">Go</button>
+			            <div class="rand"><label for="floor">Min</label><input id="floor" type="text" value="0" onclick="this.select();"></div>
+						<div class="rand"><label for="ceiling">Max</label><input id="ceiling" type="text" value="100" onclick="this.select();"></div>
+						<div class="rand"><label for="rounds">Quantity</label><input id="rounds" type="text" value="1000" onclick="this.select();"></div>
+						
+						<div id="randbutton"><button id="go" onclick="createChart()">Go</button></div>
 			
 						<canvas id="myChart" width="100" height="100" style="border: red 3px solid"></canvas>
 			        </div>

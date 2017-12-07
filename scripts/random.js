@@ -1,108 +1,75 @@
-function createRandoms() {
-			/*let numtext = document.getElementById("rounds").value;
-			if (isNaN(numtext)) {
-				alert("False");
-			}
-			let nums = Number(numtext);
-			if (nums < 200) {
-				return getAFewRandomNumbers();
-			} else {
-				return getALotRandomNumbers();
-			}
-			*/		
-			return getAFewRandomNumbers();	
-		}
-		
-		function randomNumbers() {
-			// Get controls, check them and convert to numbers
+		function createRandoms() {	
+			//alert("hep-1");	
 			let mintext = document.getElementById("floor").value;
 			let maxtext = document.getElementById("ceiling").value;
-			let numtext = document.getElementById("rounds").value;
-			if (isNaN(mintext) || isNaN(maxtext) || isNaN(numtext)) {
-				alert("False");
+			let numstext = document.getElementById("rounds").value;
+			//alert("hep0");
+			//alert(mintext);
+			//alert(maxtext);
+			//alert(numstext);
+			//alert(checkValue(mintext));
+			//alert(checkValue(maxtext));
+			//alert(checkValue(numstext));
+			if ( !(checkValue(mintext) && checkValue(maxtext) && checkValue(numstext)) ) {
+				alert("Given value is not a number.");
+				return;
 			}
+			
+			//alert("hep1");
 			let min = Number(mintext);
 			let max = Number(maxtext);
-			let nums = Number(numtext);
+			let nums = Number(numstext);
+
+			if (min > max) {
+				alert("Minimum should be less than maximum.");
+				return;
+			}
 			
-			
+			if (nums <= 0) {
+				alert("Number of randoms should more than 0.");
+				return;
+			}
+
 			let range = max - min;
 			var randoms = [];
-			//var bins = [];
 			let binsize = 100;
 			
 			for (var i = 0; i < nums; i++) {
+				//let rand = Math.floor(Math.random() * range + min);
 				let rand = Math.random() * range + min;
-				randoms.push(rand);
-			}
-			
-			for (var i = 0; i < binsize; i++) {
-				bins.push({ x: i, y: 0 });
-			}
-			
-			var divider = range/binsize;
-			
-			for (var i = 0; i < nums; i++) {
-				let binnumber = Math.floor(randoms[i] / divider);
-				bins[binnumber]++; 
-			}
-			
-		}
-		
-		function getAFewRandomNumbers() {
-			
-			let mintext = document.getElementById("floor").value;
-			let maxtext = document.getElementById("ceiling").value;
-			let numtext = document.getElementById("rounds").value;
-			if (isNaN(mintext) || isNaN(maxtext) || isNaN(numtext)) {
-				alert("False");
-			}
-			let min = Number(mintext);
-			let max = Number(maxtext);
-			let nums = Number(numtext);
-			
-			let range = max - min;
-			var randoms = [];
-			let binsize = 100;
-			
-			for (var i = 0; i < nums; i++) {
-				let rand = Math.floor(Math.random() * range + min);
 				randoms.push({ x: i, y: rand });
 			}
+
 			return randoms;
 		}
-		
-		function getBins(data) {
-			
-			var min = Number.MAX_SAFE_INTEGER;
-			var max = Number.MIN_SAFE_INTEGER;
-			var size = data.length;
-			
-			for (var i = 0; i < size; i++) {
-				if (data[i].y < min) {
-					min = data[i].y;
-				}
-				if (data[i].y > max) {
-					max = data[i].y;
-				}
-			}
-			
-			var bins = [];
-			let binsize = max - min;
 
-			for (i = 0; i < binsize + 1; i++) {
-				//bins.push({ x: i, y: 0 });
-				bins.push(0);
+		function checkValue(value) {
+			//alert("check: " + value);
+			//alert(value + ", value[0] = " + value[0] + ", is number: " + "0123456789".includes(value[0]) + ".");
+			//alert("value.length: " + value.length);
+			//alert("value.lenght: " + value.length + ", isNaN(" + value[0] + "): " + isNaN(value[0]));
+			//alert("ehto1: " + (value.length == 1));
+			//alert("value[0]: " + value[0]);
+			//alert("ehto2 (" + value[0] + "): " + ( isNaN(value[0]) ) );
+			//alert("ehto3: " + (value.length > 1));
+			//alert("ehto4: " + (!"-0123456789".includes(value[0])));
+			if ((value.length == 1 && isNaN(value[0])) || 
+				(value.length > 1 && (!"-0123456789".includes(value[0])) ) ) {
+				//alert("length 1 and value is not a number");
+				return false;
+			} else if (value.length > 1) {			
+				for (var i = 1; i < value.length; i++) {
+					//alert("i: " + i + ", value[" + i + "] = " + value[i] + ".");
+					if (!"0123456789".includes(value[i])) {
+						//alert("checkValue Given value is not a number.");
+						return false;
+					}
+				}
 			}
-			
-			for (var i = 0; i < size; i++) {
-				let binnumber = Math.floor(data[i].y - min);
-				//bins[binnumber].y++;
-				bins[binnumber]++;
-			}
+			//alert("returning true");
+			return true;
+		} 
 
-			return bins;
-		}
 
 		function getRunningAverages(data) {
 			var averages = [];
@@ -116,55 +83,29 @@ function createRandoms() {
 			}
 			return averages;
 		}
-		
-		function createLabels() {
-			var labels = [];
-			for (var i = 0; i < 100; i++) {
-				labels.push("#" + i.toString());
-			}
-			return labels;
-		}
-
+				
 		function createChart() {
+			
 			var datas = createRandoms();
-			var chartlabels = createLabels();
 			var avg = getRunningAverages(datas);
-			var bins = getBins(datas);
-			//alert(bins);
-			for (var i = 0; i < 100; i++) {
-				//datas.push( { x: i, y: Math.random() * 100 } );
-				chartlabels.push("#" + i.toString());
-			}
 			
 			var ctx = document.getElementById("myChart").getContext('2d');
 			
 			var myChart = new Chart(ctx, {
 			    type: 'bar',
 			    data: {
-			        labels: chartlabels,
 			        datasets: [{
 					        label: 'Running Average', 
 					        data: avg, 
-					        borderColor: 'red', 
+					        borderColor: 'red',
+					        backgroundColor: 'red', 
 					        lineTension: 0, 
-					        fill: 'false', 
+					        fill: 'true', 
 					        showLine: 'true', 
 					        yAxisID: 'randomY',
 					        xAxisID: 'randomX',
 					        type: 'line'					        
 				        }, 
-				        {
-					        label: 'Bins', 
-					        data: bins, 
-					        borderColor: 'green', 
-					        backgroundColor: 'green', 
-					        //yAxisID: 'binsY',
-					        //xAxisID: 'binsX', 
-					        //barPercentage: 1.0,
-					        //barThickness: 3,
-					        //borderWidth: 1, 
-					        type: 'bar'					        
-				        },
 				        {
 				            label: 'Random Numbers',
 				            data: datas, 
@@ -185,34 +126,18 @@ function createRandoms() {
 					            type: 'linear', 
 					            position: 'left',
 				                ticks: {
-				                    beginAtZero:true
+				                    beginAtZero:false
 				                }
-			                }, 
-			                {
-				                id: 'binsY', 
-				                type: 'linear', 
-				                position: 'right', 
-				                ticks: {
-				                    beginAtZero:true
-				                }
-			            	}],
+			                }],
 			            xAxes: 
 			            	[{
 					            id: 'randomX', 
 					            type: 'linear', 
 					            position: 'bottom', 
 					            ticks: {
-						            beginAtZero: true
+						            beginAtZero: false
 					            }
-							}/*, 
-							{
-						        id: 'binsX', 
-						        type: 'linear', 
-						        position: 'top', 
-						        ticks: {
-							        beginAtZero: true
-					            }
-			            	}*/]
+							}]
 			            } 
 			        }
 			    }
