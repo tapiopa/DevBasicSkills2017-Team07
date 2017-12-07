@@ -4,7 +4,8 @@ canvas {
 }
 
 div.rand {
-	width: 100px;
+	width: 130px;
+	margin-left: 10px;
 	float: left;
 }
 

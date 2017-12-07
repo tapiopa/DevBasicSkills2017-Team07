@@ -9,147 +9,175 @@
     <link rel="stylesheet" href="css/numbersystems.css">
     <link rel="stylesheet" href="css/truthtables.css">
 
-
-    <script src="./js/simple-tabs-pure-js.js"></script>
-    
+    <script src="scripts/simple-tabs-pure-js.js"></script>
+    <script src="scripts/Chart.bundle.js"></script>
+    <script src="scripts/numbersystems.js"></script>
+    <script type="text/javascript" src="scripts/ownscripts.js"></script>
+    <script src="scripts/truthtables.js"></script>
+    <script src="scripts/random.js" charset="utf-8"></script>
+    <script type="text/javascript" src="scripts/ownscripts.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
     <script>        
         window.onload = function() {
             var demoTabs = new SimpleTabs(document.getElementById('demo-tabs'));
             fillTruths();
         };
     </script>
-    
-    <script src="js/numbersystems.js"></script>
-    <script src="js/truthtables.js"></script>
-    <script src="js/Chart.bundle.js"></script>
-	<script src="js/random.js" charset="utf-8">	</script>
+
 </head>
 <body>
 
      <div class="outer-outer-wrap">
-    <p id="preface">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum facilis sequi, minus odit deserunt voluptatum adipisci eligendi minima suscipit soluta, cum saepe. Alias non quae, eveniet incidunt error impedit aut.</p>
-    <ul class="simple-tabs" id="demo-tabs">
-        <li class="numsys active">Number Systems</li>
-        <li class="numtable">Number Table</li>
-        <li class="combinatorics">Combinatorics</li>
-        <li class="truth">Truth Tables</li>
-        <li class="random">Random Values</li>
-        <li class="quadratic">Quadratic Function</li>
-    </ul>
-    
-    <!-- 
-	    <div class="clear-float"></div>
-    -->
-<div class="outer-wrap"> 
-	
-    <div class="tabs">
-    <div id="numsys" class="tab-page active-page">
-        <div class="ninety-percent-pad">
-	        <div class="numsyscontents">
-		        <div class="numsysinputs">
-			        <div class="numsysinputgroup">
-				        <div class="numsysinput"><label for="decimal">Decimal</label>
-				        <input id="decimal" type="number" value="0" onchange="convertDecimal()"></div>
-				        <button id="decconvert" onclick="convertDecimal()">Convert dec</button></div>
-					<div class="numsysinputgroup">
-						<div class="numsysinput"><label for="binary">Binary</label>
-						<input id="binary" type="number" name="binary" value="0" onchange="convertBinary()"></div>
-						<button id="binconvert" onclick="convertBinary()">Convert bin</button></div>
-					<div class="numsysinputgroup">
-						<div class="numsysinput"><label for="octal">Octal</label>
-						<input id="octal" type="number" name="octal" value="0" onchange="convertOctal()"></div>
-						<button id="octconvert" onclick="convertOctal()">Convert oct</button></div>
-					<div class="numsysinputgroup">
-						<div class="numsysinput"><label for="hexadecimal">Hexadecimal</label>
-						<input id="hexadecimal" type="text" name="hexadecimal" value="0" onchange="convertHexadecimal()"></div>
-						<button id="hexconvert" onclick="convertHexadecimal()">Convert hex</button></div>
-		        </div>
-		        
-				<button onclick="reset()">Reset</button>
-	        </div>
-        </div>
-    </div>
-    
-    <div id="numtable" class="tab-page">
-        <div class="ninety-percent-pad">
-            
-        </div>
-    </div>
-    
-    <div id="combinatorics" class="tab-page">
-        <div class="ninety-percent-pad">
- 
-        </div>
-    </div>
-    
-        <div id="truth" class="tab-page">
-        <div class="ninety-percent-pad">
-            	<button id="negation" onclick="doNot()">&not;</button>
-				<button id="and" onclick="doAnd()">&and;</button>
-				<button id="or" onclick="doOr()">&or;</button>
-				<button id="xor" onclick="doXor()">&oplus;</button>
-				<button id="implication" onclick="doImplication()">&rArr;</button>
-				<button id="equivalence" onclick="doEquivalence()">&hArr;</button>
-				<table>
-					<caption></caption>
-					<thead>
-						<tr>
-							<th>p</th>
-							<th>q</th>
-							<th id="operation">x</th>
-						</tr>
-					</thead>
-					<tfoot>
-						<tr>
-							<td></td>
-						</tr>
-					</tfoot>
-					<tbody>
-						<tr>
-							<td id="p1">p1</td>
-							<td id="q1">q1</td>
-							<td id="o1">o1</td>
-						</tr>
-						<tr>
-							<td id="p2">p2</td>
-							<td id="q2">q2</td>
-							<td id="o2">o2</td>
-						</tr>
-						<tr>
-							<td id="p3">p3</td>
-							<td id="q3">q3</td>
-							<td id="o3">o3</td>
-						</tr>
-						<tr>
-							<td id="p4">p4</td>
-							<td id="q4">q4</td>
-							<td id="o4">o4</td>
-						</tr>
-					</tbody>
-				</table>
-        </div>
-    </div>
-    
-        <div id="random" class="tab-page">
-        <div class="ninety-percent-pad">
-            <div class="rand"><label for="floor">Min</label><input id="floor" type="number" name="floor" value="0"></div>
-			<div class="rand"><label for="ceiling">Max</label><input id="ceiling" type="number" name="ceiling" value="100"></div>
-			<div class="rand"><label for="rounds">Qty</label><input id="rounds" type="number" name="rounds" value="1000"></div>
-			<input id="integer" type="radio" name="type">Integer</input>
-			<input id="float" type="radio" name="type">Float</input>
-			<button id="go" onclick="createChart()">Go</button>
+	     
+	    <!-- Preface -->
+	    <p id="preface">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum facilis sequi, minus odit deserunt voluptatum adipisci eligendi minima suscipit soluta, cum saepe. Alias non quae, eveniet incidunt error impedit aut.</p>
+	    
+	    
+	    <ul class="simple-tabs" id="demo-tabs">
+	        <li class="numsys active">Number Systems</li>
+	        <li class="numtable">Number Table</li>
+	        <li class="combinatorics">Combinatorics</li>
+	        <li class="truth">Truth Tables</li>
+	        <li class="random">Random Values</li>
+	        <li class="quadratic">Quadratic Function</li>
+	    </ul>
 
-			<canvas id="myChart" width="100" height="100" style="border: red 3px solid"></canvas>
-        </div>
-    </div>
-    
-        <div id="quadratic" class="tab-page">
-        <div class="ninety-percent-pad">
-            
-        </div>
-    </div>
-</div> <!-- Tabs -->
-</div><!-- Outer wrap -->
+		<div class="outer-wrap"> 
+			
+		    <div class="tabs">
+			    
+				<!-- Number Systems -->
+			    <div id="numsys" class="tab-page active-page">
+				    
+			        <div class="ninety-percent-pad">
+				        <div class="numsyscontents">
+					        <div class="numsysinputs">
+						        <div class="numsysinputgroup">
+							        <div class="numsysinput">
+								        <label for="decimal">Decimal</label>
+										<input id="decimal" type="number" value="0" onchange="convertDecimal()">
+									</div>
+							        <button id="decconvert" onclick="convertDecimal()">Convert dec</button>
+							    </div>
+								<div class="numsysinputgroup">
+									<div class="numsysinput">
+										<label for="binary">Binary</label>
+										<input id="binary" type="number" name="binary" value="0" onchange="convertBinary()">
+									</div>
+									<button id="binconvert" onclick="convertBinary()">Convert bin</button>									
+								</div>
+								<div class="numsysinputgroup">
+									<div class="numsysinput">
+										<label for="octal">Octal</label>
+										<input id="octal" type="number" name="octal" value="0" onchange="convertOctal()">
+									</div>
+									<button id="octconvert" onclick="convertOctal()">Convert oct</button>
+								</div>
+								<div class="numsysinputgroup">
+									<div class="numsysinput">
+										<label for="hexadecimal">Hexadecimal</label>
+										<input id="hexadecimal" type="text" name="hexadecimal" value="0" onchange="convertHexadecimal()">
+									</div>
+									<button id="hexconvert" onclick="convertHexadecimal()">Convert hex</button>
+								</div>
+					        </div><!-- numsysinputs -->					        
+							<div id="numsysresetbutton">
+								<button onclick="reset()">Reset</button>
+							</div>
+				        </div><!-- numsyscontents -->
+				        <p>
+					        Maximum decimal number: 99999999999
+					        Maximum binary number: 111111111111111111111
+					        Maximum octal number: 
+					        Maximum hexadecimal number: fffffffff
+				        </p>
+			        </div><!-- ninety -->
+			    </div> <!-- Number Systems -->
+			    
+			    <!-- Number Table -->
+			    <div id="numtable" class="tab-page">
+			        <div class="ninety-percent-pad">
+			            
+			        </div>
+			    </div><!-- Number Table -->
+			    
+			    <!-- Combinatorics -->
+			    <div id="combinatorics" class="tab-page">
+			        <div class="ninety-percent-pad">
+			 
+			        </div>
+			    </div>
+			    
+			    <!-- Truth Tables -->
+			    <div id="truth" class="tab-page">
+			        <div class="ninety-percent-pad">
+				        <div id="opbuttons">
+			            	<button id="negation" onclick="doNot()">&not;</button>
+							<button id="and" onclick="doAnd()">&and;</button>
+							<button id="or" onclick="doOr()">&or;</button>
+							<button id="xor" onclick="doXor()">&oplus;</button>
+							<button id="implication" onclick="doImplication()">&rArr;</button>
+							<button id="equivalence" onclick="doEquivalence()">&hArr;</button>
+				        </div>
+						<table>
+							<thead>
+								<tr>
+									<th class="p1">p</th>
+									<th class="p2">q</th>
+									<th class="op" id="operation"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="p1" id="p1">p1</td>
+									<td class="p2" id="q1">q1</td>
+									<td class="op" id="o1">o1</td>
+								</tr>
+								<tr>
+									<td class="p1" id="p2">p2</td>
+									<td class="p2" id="q2">q2</td>
+									<td class="op" id="o2">o2</td>
+								</tr>
+								<tr>
+									<td class="p1" id="p3">p3</td>
+									<td class="p2" id="q3">q3</td>
+									<td class="op" id="o3">o3</td>
+								</tr>
+								<tr>
+									<td class="p1" id="p4">p4</td>
+									<td class="p2" id="q4">q4</td>
+									<td class="op" id="o4">o4</td>
+								</tr>
+							</tbody>
+						</table>
+						<div id="resetbuttons">
+							<button id="fill" onclick="fillTruths()">Fill</button>
+							<button id="reset" onclick="reset()">Reset</button>
+						</div>
+			        </div>
+			    </div>
+			    
+			    <!-- Random Numbers -->
+			    <div id="random" class="tab-page">
+			        <div class="ninety-percent-pad">
+			            <div class="rand"><label for="floor">Minimum</label><input id="floor" type="number" name="floor" value="0"></div>
+						<div class="rand"><label for="ceiling">Maximum</label><input id="ceiling" type="number" name="ceiling" value="100"></div>
+						<div class="rand"><label for="rounds">Quantity</label><input id="rounds" type="number" name="rounds" value="1000"></div>
+						<button id="go" onclick="createChart()">Go</button>
+			
+						<canvas id="myChart" width="100" height="100" style="border: red 3px solid"></canvas>
+			        </div>
+			    </div>
+			    
+				<!-- Quadratic Polynomial -->
+			    <div id="quadratic" class="tab-page">
+			        <div class="ninety-percent-pad">
+			            
+			        </div>
+			    </div>
+		    
+		</div> <!-- Tabs -->
+		</div><!-- Outer wrap -->
 </div> <!-- Outer outer wrap -->
 </body>
 </html>

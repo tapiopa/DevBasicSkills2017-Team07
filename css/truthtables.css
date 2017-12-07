@@ -1,0 +1,59 @@
+table {
+	background-color: white;
+	/*border: solid 1px gray;*/
+	width; 200px;
+	height: 200px;
+	text-align: center;
+	margin-left: 80px;
+}
+
+td {
+	width: 50px;
+}
+
+#o1, #o2, #o3, #o4 {
+	border-left: 1px gray solid;
+}
+
+.op {
+	font-weight: bold;
+	width: 70px;
+}
+
+thead {
+	background-color: gray;
+	color: white;
+	font-weight: bold;
+	height: 15px;
+	padding-bottom: 5px;
+}
+
+
+div#opbuttons {
+	width: 30px;
+	float: left;
+	margin-top: 10px;
+}
+
+div#opbuttons button {
+	width: 30px;
+	height: 30px;
+	font-weight: bold;
+	font-size: large;
+}
+
+div#resetbuttons {
+	width: 300px;
+	text-align: center;
+	height: 30px;
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
+div#resetbuttons button {
+	width: 100px;
+	height: 30px;
+	text-align: center;
+	font-weight: bold;
+	font-size: medium;
+}

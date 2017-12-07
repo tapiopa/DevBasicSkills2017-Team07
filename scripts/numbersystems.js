@@ -1,3 +1,5 @@
+// 111111111111111111111111111111111111111111111
+
 function convertDecimal() {	
 	let decput = document.getElementById("decimal");
 	let binput = document.getElementById("binary");
@@ -81,11 +83,16 @@ function convertHexadecimal() {
 	let binput = document.getElementById("binary");
 	let octput = document.getElementById("octal");
 	let hexput = document.getElementById("hexadecimal");
-	
+	let hex = hexput.value;
+	let hexstr = hex.toString();
+	let chrs = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F'];
+	for (var i = 0; i < hexstr().length; i++) {
+		
+	}
 	/*if (isNaN(decput.value)) {
 		alert("False");
 	}*/
-	let hex = hexput.value;
+	
 	let dec = parseInt(hex, 16);
 	decput.value = dec;
 	binput.value = dec.toString(2)

@@ -6,8 +6,8 @@ body {
 }
 
 div.outer-outer-wrap {
-	width: 690px;
-	height: 500px;
+	width: 790px;
+	height: 700px;
 	/*border: solid 3px lightgray;*/
 	margin-left: auto;
 	margin-right: auto;
@@ -20,7 +20,7 @@ p#preface {
 }
 .outer-wrap {
     width:100%;
-    max-width:500px;
+    max-width:600px;
     margin: 0 auto;
     margin-left: 0;
     float: right;
@@ -67,7 +67,7 @@ ul.simple-tabs li.active {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     /*border: thin #000000 solid;*/
-    height:400px;
+    height:600px;
     padding-left: 0;
 }
 
