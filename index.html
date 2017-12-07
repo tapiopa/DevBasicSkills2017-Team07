@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/random.css">
     <link rel="stylesheet" href="css/numbersystems.css">
-    <link rel="stylesheet" href="css/truthtables.css">
+<!--	<link rel="stylesheet" href="css/truthtables.css"> -->
+	<link rel="stylesheet" type="text/css" href="css/numbertables.css">
 
     <script src="scripts/simple-tabs-pure-js.js"></script>
     <script src="scripts/Chart.bundle.js"></script>
     <script src="scripts/numbersystems.js"></script>
-    <script type="text/javascript" src="scripts/ownscripts.js"></script>
     <script src="scripts/truthtables.js"></script>
     <script src="scripts/random.js" charset="utf-8"></script>
     <script type="text/javascript" src="scripts/ownscripts.js"></script>
@@ -97,15 +97,77 @@
 			    <!-- Number Table -->
 			    <div id="numtable" class="tab-page">
 			        <div class="ninety-percent-pad">
-			            
-			        </div>
+						<div class="scroll_box">
+						<div class="column">
+							<table id="number_table" class="number_table" title="empty">
+								<tr>
+								<th class="table_header">Decimal</th>
+								<th class="table_header">Binary</th>
+								<th class="table_header">Octadecimal</th>
+								<th class="table_header">Hexadecimal</th>
+								</tr>
+							</table>
+							</div>
+					
+							<div class="column">
+							<p> 
+							<button  class="button_group" onclick="numbersystable(1)">Generate</button>
+							</p>
+							<p>   
+							<button  class="button_group" onclick="numbersystable(0)">Clear</button>
+							</p>        
+							</div> 
+					</div>
+				</div>
 			    </div><!-- Number Table -->
 			    
 			    <!-- Combinatorics -->
 			    <div id="combinatorics" class="tab-page">
 			        <div class="ninety-percent-pad">
-			 
-			        </div>
+					<div class="combinatorics_text">	Pick one of these sets: 
+						<div>
+							<p>
+								
+										A = { 1, 2, 3, 4 } &nbsp&nbsp
+								
+										B =  {a, b, c, d, e} &nbsp
+								
+										C = {!, ", #, $, %, &}
+								
+						      
+							</p>
+						</div>
+						<div class="set_buttons">
+							<button id="setA_button" class="button_group" onclick='setselector( 4, "A" ),change_button_state( 1, ["combination", "permutation"] )'>Select A</button>
+							<button id="setB_button" class="button_group" onclick='setselector( 5, "B" ),change_button_state( 1, ["combination", "permutation"] )'>Select B</button>
+							<button id="setC_button" class="button_group" onclick='setselector( 6, "C" ),change_button_state( 1, ["combination", "permutation"] )'>Select C</button>
+						</div>
+						<div class="standard_text">Calculate
+						<div class="radio_button" id="type_select">
+							<input type="radio" id="combination" name="comb_type" value="combinations" disabled onclick="change_button_state( 0, ['replacement', 'no_replacement']), change_button_state( 1, ['calculate']) ">Combinations
+							<input type="radio" id="permutation" name="comb_type" value="permutations" disabled onclick="change_button_state( 1, ['replacement', 'no_replacement']), change_button_state( 0, ['calculate'])">Permutations
+						</div>
+						</div>
+						<div class="standard_text">
+						<div id="elements_to_select">
+						No set selected!
+						</div>
+						</div>
+						<div class="standard_text">
+						Calculate permutations with 
+						<div class="radio_button" id="permutation_buttons">
+							<input type="radio" name="perm_type" value="replacement" disabled id="replacement" onclick="change_button_state( 1, ['calculate'])">Replacement
+							<input type="radio" name="perm_type" value="no_replacement" disabled id="no_replacement" onclick="change_button_state( 1, ['calculate'])">No replacement
+						</div>
+						</div>
+						<button class="button_group" onclick="do_the_math()" disabled id="calculate">Calculate!</button>
+						<h1>Results</h1>
+						<div class="results_scrollbox">
+							
+							<div id="results"></div>
+						</div>
+					</div>
+				</div>
 			    </div>
 			    
 			    <!-- Truth Tables -->
@@ -172,8 +234,49 @@
 				<!-- Quadratic Polynomial -->
 			    <div id="quadratic" class="tab-page">
 			        <div class="ninety-percent-pad">
-			            
-			        </div>
+						<div class="quadratic_eq"> 
+						<p>
+							This program solves the equation \(ax^2 + bx + c = 0\) by using the quadratic formula
+							$$ x = {-b \pm \sqrt{ b^2 - 4ac} \over 2a }. $$
+							</p>
+							<div class="standard_text">
+							Please enter values for constants \(a, b\) and \(c\) : 
+							</div>
+							<div class="standard_text">
+								<div>
+									\(a=\)
+								</div>
+								<div class="pol_input">
+									<input type="text" id="second_dgr" name="second_dgr_coef" pattern="-?\d+.?\d+">
+								</div>
+							</div>
+							<div class="standard_text">
+								<div>
+									\(b=\)
+								</div>
+								<div class="pol_input">
+									<input type="text" id="first_dgr" name="first_dgr_coef" pattern="-?\d+.?\d+">
+								</div>
+							</div>
+							<div class="standard_text">
+								<div>
+									\(c=\)
+								</div>
+								<div class="pol_input">
+									<input type="text" id="constant_dgr" name="constant_coef" pattern="-?\d+.?\d+">
+								</div>
+							</div>
+							
+							<button class="button_group" onclick='getroots();MathJax.Hub.Queue(["Typeset",MathJax.Hub,"solution"])'>Solve the equation</button>
+						
+							<div class="solution_txt">
+								Solution: 
+								<div id="solution">
+						
+								</div>
+							</div>        
+					</div>
+					</div>
 			    </div>
 		    
 		</div> <!-- Tabs -->
