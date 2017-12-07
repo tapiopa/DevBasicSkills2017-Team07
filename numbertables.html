@@ -2,8 +2,11 @@
 <html>
     <head>
         <script type="text/javascript" src="scripts/ownscripts.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/default.css">
+        <link rel="stylesheet" type="text/css" href="css/numbertables.css">
     </head>
     <body>
+        <div class="column">
         <table id="number_table" class="number_table" title="empty">
             <tr>
             <th>Decimal</th>
@@ -12,8 +15,15 @@
             <th>Hexadecimal</th>
             </tr>
         </table>
+        </div>
 
-        <button onclick="numbersystable(0)">Clear</button>
-        <button onclick="numbersystable(1)">Generate</button>
+        <div class="column">
+        <p> 
+        <button  class="button_group" onclick="numbersystable(1)">Generate</button>
+        </p>
+        <p>   
+        <button  class="button_group" onclick="numbersystable(0)">Clear</button>
+        </p>        
+        </div>
     </body>
 </html>
