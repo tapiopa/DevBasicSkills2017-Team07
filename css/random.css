@@ -7,7 +7,7 @@ div.rand {
 	/*width: 125px;*/
 	margin-left: 10px;
 	float: left;
-	border: solid green 2px;
+
 }
 
 div.rand input {
@@ -18,5 +18,5 @@ div.rand input {
 
 div#randbutton {
 	float: right;
-	border: solid green 2px;
+
 }
