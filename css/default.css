@@ -5,3 +5,8 @@
 .active-page {
     display: block;
 }
+
+.button_group {
+    background-color: rgb(224, 231, 255);
+    font-size: 16px;
+}

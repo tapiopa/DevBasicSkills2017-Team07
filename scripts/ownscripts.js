@@ -60,7 +60,13 @@ function numbersystable( action ) {
 
                 for ( indexer = 0; indexer < numbers_in_table.length; indexer += 4 ) {
 
-                        table.innerHTML += "<tr> <td> " + numbers_in_table[ indexer] + " </td>  <td>" + numbers_in_table[ indexer + 1] + "</td> <td>" + numbers_in_table[ indexer + 2] + "</td> <td> " +numbers_in_table[ indexer + 3] + "</td> </tr>";
+                        if ( ( indexer / 4 ) % 2 == 0 ) {
+                                table.innerHTML += "<tr style='background-color:rgb(237,237,237)'> <td> " + numbers_in_table[ indexer] + " </td>  <td>" + numbers_in_table[ indexer + 1] + "</td> <td>" + numbers_in_table[ indexer + 2] + "</td> <td> " +numbers_in_table[ indexer + 3] + "</td> </tr>";
+                        }
+                        else {
+                                table.innerHTML += "<tr style='background-color:rgb(247,247,247)'> <td> " + numbers_in_table[ indexer] + " </td>  <td>" + numbers_in_table[ indexer + 1] + "</td> <td>" + numbers_in_table[ indexer + 2] + "</td> <td> " +numbers_in_table[ indexer + 3] + "</td> </tr>";
+                        }
+                               
                 }
 
                 table.title = "full";
