@@ -55,41 +55,41 @@
 						        <div class="numsysinputgroup">
 							        <div class="numsysinput">
 								        <label for="decimal">Decimal</label>
-										<input id="decimal" type="number" value="0" onchange="convertDecimal()">
+										<input id="decimal" type="number" value="0" onclick="this.select();" onchange="convertDecimal()">
 									</div>
-							        <button id="decconvert" onclick="convertDecimal()">Convert dec</button>
+							        <button id="decconvert" onclick="convertDecimal()">Convert decimal</button>
 							    </div>
 								<div class="numsysinputgroup">
 									<div class="numsysinput">
 										<label for="binary">Binary</label>
-										<input id="binary" type="number" name="binary" value="0" onchange="convertBinary()">
+										<input id="binary" type="number" name="binary" value="0" onclick="this.select();" onchange="convertBinary()">
 									</div>
-									<button id="binconvert" onclick="convertBinary()">Convert bin</button>									
+									<button id="binconvert" onclick="convertBinary()">Convert binary</button>									
 								</div>
 								<div class="numsysinputgroup">
 									<div class="numsysinput">
 										<label for="octal">Octal</label>
-										<input id="octal" type="number" name="octal" value="0" onchange="convertOctal()">
+										<input id="octal" type="number" name="octal" value="0" onclick="this.select();" onchange="convertOctal()">
 									</div>
-									<button id="octconvert" onclick="convertOctal()">Convert oct</button>
+									<button id="octconvert" onclick="convertOctal()">Convert octal</button>
 								</div>
 								<div class="numsysinputgroup">
 									<div class="numsysinput">
 										<label for="hexadecimal">Hexadecimal</label>
-										<input id="hexadecimal" type="text" name="hexadecimal" value="0" onchange="convertHexadecimal()">
+										<input id="hexadecimal" type="text" name="hexadecimal" value="0" onclick="this.select();" onchange="convertHexadecimal()">
 									</div>
-									<button id="hexconvert" onclick="convertHexadecimal()">Convert hex</button>
+									<button id="hexconvert" onclick="convertHexadecimal()">Convert hexadecimal</button>
 								</div>
 					        </div><!-- numsysinputs -->					        
 							<div id="numsysresetbutton">
 								<button onclick="reset()">Reset</button>
 							</div>
 				        </div><!-- numsyscontents -->
-				        <p>
-					        Maximum decimal number: 99999999999
-					        Maximum binary number: 111111111111111111111
-					        Maximum octal number: 
-					        Maximum hexadecimal number: fffffffff
+				        <p class="footertext">
+					        Maximum decimal number: 99999999999<br>
+					        Maximum binary number: 111111111111111111111<br>
+					        Maximum octal number: 7777777777777<br>
+					        Maximum hexadecimal number: fffffffff<br>
 				        </p>
 			        </div><!-- ninety -->
 			    </div> <!-- Number Systems -->
@@ -181,7 +181,7 @@
 							<button id="implication" onclick="doImplication()">&rArr;</button>
 							<button id="equivalence" onclick="doEquivalence()">&hArr;</button>
 				        </div>
-						<table>
+						<table id="truthtable">
 							<thead>
 								<tr>
 									<th class="p1">p</th>
@@ -222,9 +222,9 @@
 			    <!-- Random Numbers -->
 			    <div id="random" class="tab-page">
 			        <div class="ninety-percent-pad">
-			            <div class="rand"><label for="floor">Minimum</label><input id="floor" type="number" name="floor" value="0"></div>
-						<div class="rand"><label for="ceiling">Maximum</label><input id="ceiling" type="number" name="ceiling" value="100"></div>
-						<div class="rand"><label for="rounds">Quantity</label><input id="rounds" type="number" name="rounds" value="1000"></div>
+			            <div class="rand"><label for="floor">Minimum</label><input id="floor" type="number" name="floor" value="0" onclick="this.select();"></div>
+						<div class="rand"><label for="ceiling">Maximum</label><input id="ceiling" type="number" name="ceiling" value="100" onclick="this.select();"></div>
+						<div class="rand"><label for="rounds">Quantity</label><input id="rounds" type="number" name="rounds" value="1000" onclick="this.select();"></div>
 						<button id="go" onclick="createChart()">Go</button>
 			
 						<canvas id="myChart" width="100" height="100" style="border: red 3px solid"></canvas>
