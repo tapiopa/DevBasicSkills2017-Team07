@@ -85,7 +85,7 @@ function setselector( element_count, set_name ) {
         var elements = document.getElementById( "elements_to_select" );
         var elements_string = "";
 
-        elements_string = "Select number of elements from set " + set_name + "<select id='number_to_pick' name=" + set_name + ">";
+        elements_string = "Select number of elements from set " + set_name + ": <select style='background-color=rgb(224,231,255)' id='number_to_pick' name=" + set_name + ">";
 
         for ( indexer = 1; indexer <= element_count; indexer++ ) {
                 elements_string += "<option value=" + indexer + ">" + indexer + "</option>";

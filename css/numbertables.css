@@ -1,13 +1,19 @@
 .number_table {
-    border-collapse: collapse;
+ /*   border-collapse: collapse;
     border-style: solid;
     border-width: 1px;
     border-radius: 10px;
     margin-right: auto;
     margin-left: auto;
-    margin-bottom: 15px;
+    margin-bottom: 15px;*/
+    background-color: white;
+	/*border: solid 1px gray;*/
+	width; 200px;
+/*	height: 200px; */
+	text-align: center;
+	margin-left: 80px;
 }
-
+/*
 tr {
     background-color: rgb(255, 255, 255);
     border-bottom: 1px solid;
@@ -21,13 +27,15 @@ td {
 
 }
 
-th {
+.table_header {
     border-bottom: 1px solid;
     border-right: 1px solid;
     padding-bottom: 3px;
     padding-right: 10px;
     padding-left: 10px;
     padding-top: 3px;
+
+
 }
 
 .button_group {
@@ -39,11 +47,24 @@ th {
 .button_group:hover {
     background-color: rgb(200, 200, 224);
 }
-
+*/
 .column {
-    float: right;
+    float: right;'
 }
 
 .column:first-child {
-    margin-right:50%;
+    margin-right: 60px;
+    margin-left: 0px;
+}
+
+.column:nth-child(2) {
+    margin-left: 0px;
+}
+
+
+
+.scroll_box {
+    width: 575px;
+    height: 600px;
+    overflow: auto;
 }
