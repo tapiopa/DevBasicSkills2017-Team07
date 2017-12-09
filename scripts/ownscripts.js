@@ -209,12 +209,19 @@ function do_permutations( set_name, sample_size, replacements ) {
                 document.getElementById( "results" ).innerHTML = "Number of permutations of length " + sample_size + " with replacement is " + Math.pow( set_name.length, sample_size ) + "<br>";
                 var test_result = permutation_replacement( set_name, sample_size );
                 
-                for ( indexer = 0; indexer < Math.pow( set_name.length, sample_size ); indexer++ ) {
+                if ( sample_size == 1 ) {
+                        for ( indexer = 0; indexer < set_name.length; indexer++ ) {
+                                document.getElementById( "results" ).innerHTML += set_name[ indexer ] + " ";
+                        }
+                }
+                else {
+                        for ( indexer = 0; indexer < Math.pow( set_name.length, sample_size ); indexer++ ) {
                               var temporary_string = test_result[ indexer ].toString();
                               var temp_str2 = temporary_string.replace( /,/g, '' );
                               document.getElementById( "results" ).innerHTML += temp_str2 + " ";
                 }
-                document.getElementById( "results" ).innerHTML += " ";
+                        document.getElementById( "results" ).innerHTML += " ";
+                }
         }
 
         else {
