@@ -176,7 +176,7 @@ function getroots() {
                else {
                //We are here because user entered integers only. Reason for making four if statements here is to get rid of situations where we 1 inside the square root and to get the
                //signs appear correctly. Statement ( ( inside_sqrt_root == 1) ? "1" : "\\sqrt{" + inside_sqrt_root + "}" ) checks if we're trying to display square root of one and replaces
-               //the square root with number one. Also we don't to 1 to appear as a denominator. 
+               //the square root with number one. Also we don't to 1 to appear as a denominator. Next time I'll plan before starting to code. 
                        let first_sign = ( (first_dgr_coef > 0 && second_dgr_coef > 0) || (first_dgr_coef < 0 && second_dgr_coef < 0) ) ? "-":"";
                        let second_sign = ( second_dgr_coef < 0 ) ? "-":"";
                        let second_fraction = ( (2 * Math.abs( second_dgr_coef ) ) / gcd_second_dis_sqr == 1 ) ? 0:1;
@@ -249,17 +249,20 @@ function getroots() {
 
                        }
                        else {
-                               let gcd_top_sum_denominator = greatestCommonDivisor( Math.abs( first_dgr_coef ) + square_root_multiplier, 2 * Math.abs( second_dgr_coef ) );
+                               let gcd_top_sum_denominator = greatestCommonDivisor( Math.abs( (  -first_dgr_coef ) + outside_sqrt_root ), 2 * Math.abs( second_dgr_coef ) );
+                               let gcd_top_sum_den_second = greatestCommonDivisor( ( Math.abs( (  -first_dgr_coef ) - outside_sqrt_root ), 2 * Math.abs( second_dgr_coef ) ) );
                                let no_sqrt_denom = Math.abs( 2 * second_dgr_coef ) / gcd_top_sum_denominator;
                                let nominator_sum_first = ( inside_sqrt_root == 1 ) ?  -first_dgr_coef  + outside_sqrt_root : 0;
                                let nominator_sum_second = ( inside_sqrt_root == 1 ) ?  -first_dgr_coef  - outside_sqrt_root : 0;
                                let nominator_first = nominator_sum_first / gcd_top_sum_denominator;
-                               let nominator_second = nominator_sum_second / gcd_top_sum_denominator;
-                               let below_nominator = ( 2 * Math.abs( second_dgr_coef ) ) / gcd_top_sum_denominator;
+                               let nominator_second = nominator_sum_second / gcd_top_sum_den_second;
+                               let below_nominator_first = ( 2 * Math.abs( second_dgr_coef ) ) / gcd_top_sum_denominator;
+                               let below_nominator_second = ( 2 * Math.abs( second_dgr_coef ) ) / gcd_top_sum_den_second; 
                                let first_sign_nom = Math.sign( nominator_first ) * Math.sign(  2 * second_dgr_coef  / gcd_top_sum_denominator );
                                let second_sign_nom = Math.sign( nominator_second ) * Math.sign(  2 * second_dgr_coef  / gcd_top_sum_denominator );
                                let first_sign_to_place = ( first_sign_nom == -1 ) ? "-":"";
-                               let second_sign_to_place = ( second_sign_nom == -1 ) ? "-":"";  
+                               let second_sign_to_place = ( second_sign_nom == -1 ) ? "-":""; 
+                               
                               
                                if ( first_dgr_coef == 0 && constant_coef != 0 ) {
                                        let first_string_to_enter, second_string_to_enter;
@@ -272,15 +275,14 @@ function getroots() {
 
                                if ( denominator == 1 ) {
                                        if ( inside_sqrt_root == 1 ) {
-                                               let gcd_nom_first = greatestCommonDivisor( Math.abs( nominator_first ), below_nominator );
-                                               let gcd_nom_second = greatestCommonDivisor( Math.abs( nominator_second ), below_nominator );
+                                               let gcd_nom_first = greatestCommonDivisor( Math.abs( nominator_first ), below_nominator_first );
+                                               let gcd_nom_second = greatestCommonDivisor( Math.abs( nominator_second ), below_nominator_second );
                                                let new_nominator_first = nominator_first / gcd_nom_first;
                                                let new_nominator_second = nominator_second / gcd_nom_second;
-                                               let new_below_nominator_first = below_nominator / gcd_nom_first;
-                                               let new_below_nominator_second = below_nominator / gcd_nom_second;
-
-                                               let first_string_to_enter = ( new_below_nominator_first == 1 ) ? new_nominator_first : first_sign_to_place + "{" + Math.abs( new_nominator_first ) + "\\over " +new_below_nominator_first + "}";
-                                               let second_string_to_enter = ( new_below_nominator_second == 1 ) ? new_nominator_second : second_sign_to_place + "{" + Math.abs( new_nominator_second ) + "\\over " + new_below_nominator_second + "}";
+                                               let new_below_nominator_first = below_nominator_first / gcd_nom_first;
+                                               let new_below_nominator_second = below_nominator_second / gcd_nom_second;
+                                               let first_string_to_enter = ( new_below_nominator_first == 1 ) ? Math.sign( second_dgr_coef ) * new_nominator_first : first_sign_to_place + "{" + Math.abs( new_nominator_first ) + "\\over " +new_below_nominator_first + "}";
+                                               let second_string_to_enter = ( new_below_nominator_second == 1 ) ? Math.sign( second_dgr_coef ) * new_nominator_second : second_sign_to_place + "{" + Math.abs( new_nominator_second ) + "\\over " + new_below_nominator_second + "}";
 
                                                solution_field.innerHTML = "$$ x = \\begin{cases} & " + first_string_to_enter + "\\" + "\\ &" + second_string_to_enter + "\\end{cases} $$";
 
@@ -290,13 +292,13 @@ function getroots() {
                                        }
                                }
                                else if ( inside_sqrt_root == 1 ) {
-                                       console.log("First dgr " + first_dgr_coef );
-                                       console.log("square root mult " + square_root_multiplier );
-                                       console.log("gcd_top_bottom " + gcd_top_bottom );
-                                       solution_field.innerHTML = "$$ x = \\begin{cases} &" +  ( ( -first_dgr_coef )  + outside_sqrt_root ) / gcd_top_bottom   +  " \\" + "\\ &" + first_sign + ( ( Math.abs(first_dgr_coef) / gcd_top_bottom ) + ( - square_root_multiplier ) ) + " \\end{cases}$$";
+                                       let gcd_nom_first = greatestCommonDivisor( Math.abs( nominator_first ), below_nominator_first );
+                                       let gcd_nom_second = greatestCommonDivisor( Math.abs( nominator_second ), below_nominator_second );
+                                       console.log("Here " + outside_sqrt_root + " " + first_dgr_coef + gcd_nom_second);
+                                       solution_field.innerHTML = "$$ x = \\begin{cases} &" +  Math.sign( second_dgr_coef ) * ( ( -first_dgr_coef )  + outside_sqrt_root ) / gcd_top_bottom   +  " \\" + "\\ &" + Math.sign( second_dgr_coef ) * ( ( -first_dgr_coef) - outside_sqrt_root ) / gcd_nom_second  + " \\end{cases}$$";
                                }
                                else {
-                                       solution_field.innerHTML = "$$ x = \\begin{cases} &" + first_sign  + ( Math.abs( first_dgr_coef ) / gcd_top_bottom ) + " + " + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "" : "\\sqrt{" + inside_sqrt_root + "}" ) + "\\sqrt{" + inside_sqrt_root + "}"   +  " \\" + "\\ &" + first_sign + ( Math.abs(first_dgr_coef) / gcd_top_bottom ) + " - " + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "" : "\\sqrt{" + inside_sqrt_root + "}" ) + " \\end{cases}$$";
+                                       solution_field.innerHTML = "$$ x = \\begin{cases} &" + first_sign  + ( Math.abs( first_dgr_coef ) / gcd_top_bottom ) + " + " + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "" : "\\sqrt{" + inside_sqrt_root + "}" )  +  " \\" + "\\ &" + first_sign + ( Math.abs(first_dgr_coef) / gcd_top_bottom ) + " - " + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "" : "\\sqrt{" + inside_sqrt_root + "}" ) + " \\end{cases}$$";
                                }
                        }
 
