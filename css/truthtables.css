@@ -7,6 +7,10 @@ table#truthtable {
 	margin-left: 80px;
 }
 
+tr:nth-child(even) {
+	background-color: rgb(237,237,237);
+}
+
 td {
 	width: 50px;
 }
@@ -20,12 +24,13 @@ td {
 	width: 70px;
 }
 
-thead {
+#truthhead {
 	background-color: gray;
 	color: white;
 	font-weight: bold;
-	height: 15px;
-	padding-bottom: 5px;
+	/*height: 25px;*/
+	/*margin-bottom: 10px;*/
+	/*padding-bottom: 5px;*/
 }
 
 

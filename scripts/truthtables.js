@@ -1,5 +1,5 @@
 //Fill truth values for 'NOT' operation, check first if basic truth values have been filled
-function doNot() {
+function doNegation() {
 	checkTruths();
 	document.getElementById("operation").innerHTML = "&not;p";
 	document.getElementById("o1").innerHTML = document.getElementById("p1").innerHTML == "T" ? "F" : "T";
@@ -99,7 +99,7 @@ function reset() {
 	document.getElementById("operation").innerHTML = "";
 }
 
-//Check if basic truth values have been filled
+//Check if basic truth values have been filled and fill them if they are empty (checks only one truth value, really)
 function checkTruths() {
 	if (document.getElementById("p1").innerHTML != "T") {
 		fillTruths();

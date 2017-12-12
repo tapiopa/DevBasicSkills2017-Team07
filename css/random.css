@@ -1,13 +1,15 @@
 canvas {
 	width: 550px !important;
 	height: 500px !important;	
+	margin-top: 10px;
 }
 
 div.rand {
 	/*width: 125px;*/
 	margin-left: 10px;
 	float: left;
-
+	margin-bottom: 10px;
+	/*border: green solid 2px;*/
 }
 
 div.rand input {
