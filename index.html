@@ -3,26 +3,21 @@
 <head>
     <title>Team 7</title>    
     <!-- basic css required -->
-    <!-- Simple tabs CSS links -->
-    <link rel="stylesheet" href="css/demo.css">
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
     <link rel="stylesheet" href="css/default.css">
-    <!-- CSS links for tab modules -->
     <link rel="stylesheet" href="css/random.css">
     <link rel="stylesheet" href="css/numbersystems.css">
 	<link rel="stylesheet" href="css/truthtables.css">
-	<link rel="stylesheet" type="text/css" href="css/numbertables.css">
 
-	<!-- Links for Javascript files for Simple Tabs and Chart.js -->
-    <script src="scripts/simple-tabs-pure-js.js"></script> <!-- Simple Tabs. See: https://www.cssscript.com/simple-javascript-tabs-library-simple-tab/ --> 
-    <script src="scripts/Chart.bundle.js"></script> <!-- Chart.js library. See: http://www.chartjs.org -->
-    <!-- Links for Javascript for tab modules -->
+    <script src="scripts/simple-tabs-pure-js.js"></script>
+    <script src="scripts/Chart.bundle.js"></script>
     <script src="scripts/numbersystems.js"></script>
     <script src="scripts/truthtables.js"></script>
     <script src="scripts/random.js" charset="utf-8"></script>
-    <script type="text/javascript" src="scripts/ownscripts.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
-    
-    <!-- Loads Simple Tabs and fills truth table -->
+	<script type="text/javascript" src="scripts/ownscripts.js"></script>
+	<!-- We decided to leave the mathjax library out of the github due to it's size. Total size unpacked is around 75MB and 32k+ files. This is only used to render graphics in
+		Quadratic Function part of the program --> 
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script> 
     <script>        
         window.onload = function() {
             var demoTabs = new SimpleTabs(document.getElementById('demo-tabs'));
@@ -36,11 +31,9 @@
      <div class="outer-outer-wrap">
 	     
 	    <!-- Preface -->
-	    <p id="preface">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum facilis sequi, minus odit deserunt voluptatum adipisci eligendi minima suscipit soluta, cum saepe. Alias non quae, eveniet incidunt error impedit aut.</p>
+	    <p id="preface">Hello there and welcome to our little program. Feel free to explore the different functionalities!</p>
 	    
-	    <!-- Web page uses Simple Tabs library. See https://www.cssscript.com/simple-javascript-tabs-library-simple-tab/ -->
 	    
-	    <!-- Definition of tabs -->
 	    <ul class="simple-tabs" id="demo-tabs">
 	        <li class="numsys active">Number Systems</li>
 	        <li class="numtable">Number Table</li>
@@ -52,7 +45,6 @@
 
 		<div class="outer-wrap"> 
 			
-			<!-- Definiton of contents for tabs -->
 		    <div class="tabs">
 			    
 				<!-- Number Systems -->
@@ -64,47 +56,41 @@
 						        <div class="numsysinputgroup">
 							        <div class="numsysinput">
 								        <label for="decimal">Decimal</label>
-										<input id="decimal" name="decimal" type="number" value="0" onclick="this.select();" onchange="convertDecimal()">
+										<input id="decimal" type="number" value="0" onclick="this.select();" onchange="convertDecimal()">
 									</div>
-							        <div class="numsysconvertbutton">
-								        <button id="decconvert" class="button_group" onclick="convertDecimal()">Convert dec</button>
-								    </div>
+							        <button class="button_group_bgcolor" id="decconvert" onclick="convertDecimal()">Convert decimal</button>
 							    </div>
 								<div class="numsysinputgroup">
 									<div class="numsysinput">
 										<label for="binary">Binary</label>
-										<input id="binary" type="number" value="0" onclick="this.select();" onchange="convertBinary()">
+										<input id="binary" type="number" name="binary" value="0" onclick="this.select();" onchange="convertBinary()">
 									</div>
-									<div class="numsysconvertbutton">
-										<button id="binconvert" class= "button_group" onclick="convertBinary()">Convert bin</button>
-									</div>									
+									<button class="button_group_bgcolor" id="binconvert" onclick="convertBinary()">Convert binary</button>									
 								</div>
 								<div class="numsysinputgroup">
 									<div class="numsysinput">
 										<label for="octal">Octal</label>
-										<input id="octal" type="number"value="0" onclick="this.select();" onchange="convertOctal()">
-									</div class="numsysconvertbutton">
-										<button id="octconvert" class="button_group" onclick="convertOctal()">Convert oct</button>
+										<input id="octal" type="number" name="octal" value="0" onclick="this.select();" onchange="convertOctal()">
 									</div>
+									<button class="button_group_bgcolor" id="octconvert" onclick="convertOctal()">Convert octal</button>
+								</div>
 								<div class="numsysinputgroup">
 									<div class="numsysinput">
 										<label for="hexadecimal">Hexadecimal</label>
-										<input id="hexadecimal" type="text"value="0" onclick="this.select();" onchange="convertHexadecimal()">
+										<input id="hexadecimal" type="text" name="hexadecimal" value="0" onclick="this.select();" onchange="convertHexadecimal()">
 									</div>
-									<div class="numsysconvertbutton">
-										<button id="hexconvert" class="button_group" onclick="convertHexadecimal()">Convert hex</button>
-									</div>
+									<button class="button_group_bgcolor" id="hexconvert" onclick="convertHexadecimal()">Convert hexadecimal</button>
 								</div>
 					        </div><!-- numsysinputs -->					        
 							<div id="numsysresetbutton">
-								<button onclick="numsysreset()" class="button_group">Clear</button>
+								<button class="button_group_bgcolor" onclick="reset()">Reset</button>
 							</div>
 				        </div><!-- numsyscontents -->
 				        <p class="footertext">
-					        <strong>Decimal number:</strong> -99999999999 &rarr; 99999999999<br>
-					        <strong>Binary number:</strong> -111111111111111111111 &rarr; 111111111111111111111<br>
-					        <strong>Octal number:</strong> -7777777777777 &rarr; 7777777777777<br>
-					        <strong>Hexadecimal number:</strong> -fffffffff &rarr; fffffffff<br>
+					        Decimal number: -99999999999 – 99999999999<br>
+					        Binary number: -111111111111111111111 – 111111111111111111111<br>
+					        Octal number: -7777777777777 – 7777777777777<br>
+					        Hexadecimal number: -fffffffff – fffffffff<br>
 				        </p>
 			        </div><!-- ninety -->
 			    </div> <!-- Number Systems -->
@@ -158,9 +144,9 @@
 							<button id="setC_button" class="button_group" onclick='setselector( 6, "C" ),change_button_state( 1, ["combination", "permutation"] )'>Select C</button>
 						</div>
 						<div class="standard_text">Calculate
-						<div class="radio_button" id="type_select">
-							<input type="radio" id="combination" name="comb_type" value="combinations" disabled onclick="change_button_state( 0, ['replacement', 'no_replacement']), change_button_state( 1, ['calculate']) ">Combinations
-							<input type="radio" id="permutation" name="comb_type" value="permutations" disabled onclick="change_button_state( 1, ['replacement', 'no_replacement']), change_button_state( 0, ['calculate'])">Permutations
+						<div id="type_select">
+							<input class="radio_button" type="radio" id="combination" name="comb_type" value="combinations" disabled onclick="change_button_state( 0, ['replacement', 'no_replacement']), change_button_state( 1, ['calculate']) ">Combinations
+							<input class="radio_button" type="radio" id="permutation" name="comb_type" value="permutations" disabled onclick="change_button_state( 1, ['replacement', 'no_replacement']), change_button_state( 0, ['calculate'])">Permutations
 						</div>
 						</div>
 						<div class="standard_text">
@@ -170,9 +156,9 @@
 						</div>
 						<div class="standard_text">
 						Calculate permutations with 
-						<div class="radio_button" id="permutation_buttons">
-							<input type="radio" name="perm_type" value="replacement" disabled id="replacement" onclick="change_button_state( 1, ['calculate'])">Replacement
-							<input type="radio" name="perm_type" value="no_replacement" disabled id="no_replacement" onclick="change_button_state( 1, ['calculate'])">No replacement
+						<div id="permutation_buttons">
+							<input class="radio_button" type="radio" name="perm_type" value="replacement" disabled id="replacement" onclick="change_button_state( 1, ['calculate'])">Replacement
+							<input class="radio_button" type="radio" name="perm_type" value="no_replacement" disabled id="no_replacement" onclick="change_button_state( 1, ['calculate'])">No replacement
 						</div>
 						</div>
 						<button class="button_group" onclick="do_the_math()" disabled id="calculate">Calculate!</button>
@@ -189,38 +175,38 @@
 			    <div id="truth" class="tab-page">
 			        <div class="ninety-percent-pad">
 				        <div id="opbuttons">
-			            	<button id="negation" class="button_group" onclick="doNegation()">&not;</button>
-							<button id="and" class="button_group" onclick="doAnd()">&and;</button>
-							<button id="or" class="button_group" onclick="doOr()">&or;</button>
-							<button id="xor" class="button_group" onclick="doXor()">&oplus;</button>
-							<button id="implication" class="button_group" onclick="doImplication()">&rArr;</button>
-							<button id="equivalence" class="button_group" onclick="doEquivalence()">&hArr;</button>
+			            	<button class="button_group_bgcolor" id="negation" onclick="doNot()">&not;</button>
+							<button class="button_group_bgcolor" id="and" onclick="doAnd()">&and;</button>
+							<button class="button_group_bgcolor" id="or" onclick="doOr()">&or;</button>
+							<button class="button_group_bgcolor" id="xor" onclick="doXor()">&oplus;</button>
+							<button class="button_group_bgcolor" id="implication" onclick="doImplication()">&rArr;</button>
+							<button class="button_group_bgcolor" id="equivalence" onclick="doEquivalence()">&hArr;</button>
 				        </div>
 						<table id="truthtable">
-							<thead id="truthhead">
-								<tr class="truthtableheadrow">
+							<thead>
+								<tr>
 									<th class="p1">p</th>
 									<th class="p2">q</th>
 									<th class="op" id="operation"></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="truthtablerow">
+								<tr>
 									<td class="p1" id="p1">p1</td>
 									<td class="p2" id="q1">q1</td>
 									<td class="op" id="o1">o1</td>
 								</tr>
-								<tr class="truthtablerow">
+								<tr>
 									<td class="p1" id="p2">p2</td>
 									<td class="p2" id="q2">q2</td>
 									<td class="op" id="o2">o2</td>
 								</tr>
-								<tr class="truthtablerow">
+								<tr>
 									<td class="p1" id="p3">p3</td>
 									<td class="p2" id="q3">q3</td>
 									<td class="op" id="o3">o3</td>
 								</tr>
-								<tr class="truthtablerow">
+								<tr>
 									<td class="p1" id="p4">p4</td>
 									<td class="p2" id="q4">q4</td>
 									<td class="op" id="o4">o4</td>
@@ -228,23 +214,22 @@
 							</tbody>
 						</table>
 						<div id="resetbuttons">
-							<button id="fill" class="button_group" onclick="fillTruths()">Fill</button>
-							<button id="reset" class="button_group" onclick="reset()">Clear</button>
+							<button class="button_group_bgcolor" id="fill" onclick="fillTruths()">Fill</button>
+							<button class="button_group_bgcolor" id="reset" onclick="reset()">Reset</button>
 						</div>
 			        </div>
 			    </div>
 			    
 			    <!-- Random Numbers -->
-			    <!j-- Uses chart.js chart library. See: http://www.chartjs.org -->
 			    <div id="random" class="tab-page">
 			        <div class="ninety-percent-pad">
 			            <div class="rand"><label for="floor">Min</label><input id="floor" type="text" value="0" onclick="this.select();"></div>
 						<div class="rand"><label for="ceiling">Max</label><input id="ceiling" type="text" value="100" onclick="this.select();"></div>
 						<div class="rand"><label for="rounds">Quantity</label><input id="rounds" type="text" value="1000" onclick="this.select();"></div>
 						
-						<div id="randbutton"><button id="go" class="button_group" onclick="createChart()">Generate</button></div>
+						<div id="randbutton"><button class="button_group_bgcolor" id="go" onclick="createChart()">Go</button></div>
 			
-						<canvas id="myChart" width="100" height="100" style="border: solid gray 1px"></canvas>
+						<canvas id="myChart" width="100" height="100" style="border: red 3px solid"></canvas>
 			        </div>
 			    </div>
 			    
