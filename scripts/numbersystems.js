@@ -170,7 +170,7 @@ function convertHexadecimal() {
 	var hexput = document.getElementById("hexadecimal");
 	
 	//Check that input value is valid
-	var hex = hexput.value;
+	var hex = hexput.value.trim();
 	var hexstr = hex.toString();
 	
 	if (!"-0123456789aAbBcCdDeEfF".includes(hexstr[0])  || hexstr === "") {

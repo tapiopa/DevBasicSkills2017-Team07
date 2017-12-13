@@ -83,7 +83,7 @@ function fillTruths() {
 }
 
 //Reset all columns
-function reset() {
+function truthtablereset() {
 	document.getElementById("p1").innerHTML = "";
 	document.getElementById("q1").innerHTML = "";
 	document.getElementById("p2").innerHTML = "";

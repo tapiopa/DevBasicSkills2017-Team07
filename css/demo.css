@@ -8,14 +8,18 @@ body {
 div.outer-outer-wrap {
 	width: 780px;
 	height: 700px;
-	border: solid 3px lightgray;
+	/*border: solid 3px lightgray;*/
 	margin-left: auto;
 	margin-right: auto;
 }
 
+div.preface {
+	width: 650px;
+	float: right;
+}
+
 p#preface {
-	width: 630px;
-	
+	width: 565px;
 	float: right;
 }
 .outer-wrap {
