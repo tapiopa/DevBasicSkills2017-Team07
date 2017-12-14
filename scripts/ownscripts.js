@@ -170,8 +170,10 @@ function getroots() {
 
                if ( !we_have_integers ) {
                        roots.push( ( - first_dgr_coef ) / ( 2 * second_dgr_coef ) );
-                       roots.push( discriminant_root / ( 2 * first_dgr_coef ) );
-                       solution_field.innerHTML = "$$ x = \\begin{cases} &" + roots[0] + " + " + Math.abs( roots[1] ) + "i \\"+"\\ \\ &" + roots[0] + " - " + Math.abs( roots[1] ) + "i \\end{cases} $$";
+                       roots.push( discriminant_root / ( 2 * second_dgr_coef ) );
+                       let real_part_first = ( roots[0] != 0 ) ? roots[0] + " + ": "" ;
+                       let real_part_second = ( roots[0] != 0 ) ? roots[0] : "" ;
+                       solution_field.innerHTML = "$$ x = \\begin{cases} &" + real_part_first + Math.abs( roots[1] ) + "i \\"+"\\ \\ &" + real_part_second + " - " + Math.abs( roots[1] ) + "i \\end{cases} $$";
                }
                else {
                //We are here because user entered integers only. Reason for making four if statements here is to get rid of situations where we 1 inside the square root and to get the
