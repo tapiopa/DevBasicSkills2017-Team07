@@ -1,6 +1,5 @@
 table#truthtable {
 	background-color: white;
-	/*border: solid 1px gray;*/
 	width; 200px;
 	height: 200px;
 	text-align: center;
@@ -28,9 +27,6 @@ td {
 	background-color: gray;
 	color: white;
 	font-weight: bold;
-	/*height: 25px;*/
-	/*margin-bottom: 10px;*/
-	/*padding-bottom: 5px;*/
 }
 
 
