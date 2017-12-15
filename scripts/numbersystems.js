@@ -43,7 +43,6 @@ function convertDecimal() {
 	hexput.style.fontWeight = "bold";
 	document.getElementById("decimal").focus();
 	document.getElementById("decimal").select();
-	//alert("hep");
 }
 
 //Check input value and calculate and fill values in other number systems
@@ -86,7 +85,6 @@ function convertBinary() {
 	//Calculate and fill values in other number systems
 	var dec = parseInt(bin, 2);
 	decput.value = dec;
-	//binput.value = dec.toString(2)
 	octput.value = dec.toString(8);
 	hexput.value = dec.toString(16);
 
@@ -147,7 +145,6 @@ function convertOctal() {
 	//Calculate and fill values in other number systems	
 	decput.value = dec;
 	binput.value = dec.toString(2);
-	//octput.value = dec.toString(8);
 	hexput.value = dec.toString(16);
 
 	//Set fields' attributes
