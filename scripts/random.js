@@ -63,10 +63,10 @@ function getRunningAverages(data) {
 	var lowerLimit = 10; //How many values must there be before the average for those numbers is calculated
 	
 	for (var i = 0; i < data.length; i++) {
-		if (i > 10) {
+		sum = sum + data[i].y;
+		if (i >= lowerLimit) {
 			averages.push({ x: i, y: sum / i });					
 		}
-		sum = sum + data[i].y;
 	}
 	return averages;
 }
@@ -81,7 +81,7 @@ function createChart() {
 	var ctx = document.getElementById("myChart").getContext('2d');
 	//Define datasets and axes
 	var myChart = new Chart(ctx, {
-	    type: 'bar',
+	    type: 'scatter',
 	    data: {
 	        datasets: [{
 			        label: 'Running Average', 
