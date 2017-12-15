@@ -2,6 +2,10 @@
 function doNegation() {
 	checkTruths();
 	document.getElementById("operation").innerHTML = "&not;p";
+	document.getElementById("q1").innerHTML = "";
+	document.getElementById("q2").innerHTML = "";
+	document.getElementById("q3").innerHTML = "";
+	document.getElementById("q4").innerHTML = "";
 	document.getElementById("o1").innerHTML = document.getElementById("p1").innerHTML == "T" ? "F" : "T";
 	document.getElementById("o2").innerHTML = document.getElementById("p2").innerHTML == "T" ? "F" : "T";
 	document.getElementById("o3").innerHTML = document.getElementById("p3").innerHTML == "T" ? "F" : "T";
@@ -101,7 +105,7 @@ function truthtablereset() {
 
 //Check if basic truth values have been filled and fill them if they are empty (checks only one truth value, really)
 function checkTruths() {
-	if (document.getElementById("p1").innerHTML != "T") {
+	if (document.getElementById("q1").innerHTML != "T") {
 		fillTruths();
 	}
 }
