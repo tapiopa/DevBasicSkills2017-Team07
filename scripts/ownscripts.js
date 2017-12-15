@@ -1,12 +1,22 @@
-function generatePrimes( integer_number ) {
-        let prime_list = [2];
-        let prime_result = true;
+class ICanHazRootz {
 
-        for (let indexer = 3; indexer <= integer_number; indexer += 2 ) {
-                for ( let tester = 0; tester < prime_list.length && prime_result; tester ++ ) {
-                        if ( indexer % prime_list[ tester ] == 0 ) {
-                                prime_result = false;
-                        }
+        constructor( second_dgr_coef, first_dgr_coef, constant_coef ) {
+                this.snd_dgr_coef = second_dgr_coef;
+                this.fst_dgr_coef = first_dgr_coef;
+                this.cnst_coef = constant_coef;
+
+                this.to_outside_root = this.getSquaresOut( this.primeComposition( Math.abs( Math.pow( this.fst_dgr_coef, 2 ) - 4 * this.snd_dgr_coef * this.cnst_coef ) ) );
+                this.inside_root =  Math.abs( Math.pow( this.fst_dgr_coef, 2 ) - 4 * this.snd_dgr_coef * this.cnst_coef ) / this.to_outside_root;
+        }
+        
+        generatePrimes( integer_number ) {
+                let prime_list = [2];
+                let prime_result = true;
+                for (let indexer = 3; indexer <= integer_number; indexer += 2 ) {
+                        for ( let tester = 0; tester < prime_list.length && prime_result; tester ++ ) {
+                                if ( indexer % prime_list[ tester ] == 0 ) {
+                                        prime_result = false;
+                                        }
                 }
                 if ( prime_result ) {
                         prime_list.push( indexer );
@@ -14,94 +24,290 @@ function generatePrimes( integer_number ) {
                 prime_result = true;
         }
 
-        return prime_list;
-}
+                return prime_list;
+        }
 
-
-function primeComposition( integer_number ) {
-        let square_int = Number.parseInt( Math.sqrt( integer_number ) );
-        let prime_list = generatePrimes( square_int );
-        let prime_composition = [];
-        let number_compose = integer_number;
-
-        for ( let indexer = 0; prime_list[ indexer ] <= number_compose; indexer++ ) {
-                if ( number_compose % prime_list[ indexer ] == 0 ) {
-                        prime_composition.push( prime_list[ indexer ] );
-                        number_compose = number_compose / prime_list[ indexer ];
-                        indexer--;
+        primeComposition( integer_number ) {
+                let square_int = Number.parseInt( Math.sqrt( integer_number ) );
+                let prime_list = this.generatePrimes( square_int );
+                let prime_composition = [];
+                let number_compose = integer_number;
+                
+                for ( let indexer = 0; prime_list[ indexer ] <= number_compose; indexer++ ) {
+                        if ( number_compose % prime_list[ indexer ] == 0 ) {
+                                prime_composition.push( prime_list[ indexer ] );
+                                number_compose = number_compose / prime_list[ indexer ];
+                                indexer--;
+                        }
                 }
-        }
-        if ( number_compose > 1 ) {
-                prime_composition.push( number_compose );
-        }
-
-        return prime_composition;
-}
-
-function greatestCommonDivisor( first_number, second_number ) {
-        let temp_array1 = primeComposition( first_number );
-        let temp_array2 = primeComposition( second_number );
-        let greatest_common = 1;
-         
-        if ( first_number == 0 || second_number == 0) {
-                return 1;
-        }
-
-        do {
-                let number_to_test = temp_array1[ 0 ];
-                temp_array1.splice( 0, 1 );
-                if ( temp_array2.indexOf( number_to_test ) != -1 ) {
-                        greatest_common *= number_to_test;
-                        temp_array2.splice( temp_array2.indexOf( number_to_test ), 1 );
+                
+                if ( number_compose > 1 ) {
+                        prime_composition.push( number_compose );
                 }
+                
+                return prime_composition;
         }
-        while ( temp_array1.length && temp_array2.length );
 
-        return greatest_common;
+        greatestCommonDivisor( first_number, second_number ) {
+                let temp_array1 = this.primeComposition( first_number );
+                let temp_array2 = this.primeComposition( second_number );
+                let greatest_common = 1;
+                
+                if ( first_number == 0 || second_number == 0) {
+                        return 1;
+                }
+                
+                do {
+                        let number_to_test = temp_array1[ 0 ];
+                        temp_array1.splice( 0, 1 );
+                        if ( temp_array2.indexOf( number_to_test ) != -1 ) {
+                                greatest_common *= number_to_test;
+                                temp_array2.splice( temp_array2.indexOf( number_to_test ), 1 );
+                        }
+                } while ( temp_array1.length && temp_array2.length );
+
+                return greatest_common;
+        }
+
+        getSquaresOut( prime_composition_array ) {
+                let squares = [];
+                let primes_and_powers = new Map();
+                let temporary_array = prime_composition_array;
+                let square_about_to_get_out = 1;
+                primes_and_powers.set( 1, 1 );
+
+                do {
+                        let prime_to_check = temporary_array.splice( 0, 1 );
+                        if ( temporary_array.indexOf( Number( prime_to_check ) ) != -1 ) {
+                                if ( primes_and_powers.has( Number( prime_to_check ) ) ) {
+                                        let indexer = primes_and_powers.get( Number(prime_to_check ) );
+                                        let temporary_indexer = Number( indexer );
+                                        temporary_indexer++;
+                                        primes_and_powers.set( Number( prime_to_check ), temporary_indexer );
+                        
+                                }
+                                else {
+                                        primes_and_powers.set( Number( prime_to_check ) , 2 );
+                                }
+                        }
+                }
+                while ( temporary_array.length > 0 );
+                let indexer = primes_and_powers.keys();
+        
+                for ( let primes of indexer ) {
+                
+                        if ( primes_and_powers.get( primes ) % 2 != 0 ) {
+                                let power = primes_and_powers.get( primes );
+                                power--;
+                                primes_and_powers.set( Number( primes ), power );
+                        }
+                }
+                let indexer2 = primes_and_powers.keys();
+                for ( let primes of indexer2 ) {
+                        square_about_to_get_out *= Math.pow( primes, primes_and_powers.get( Number( primes )) );
+                }
+                return square_about_to_get_out;
+        }
 }
 
-function getSquaresOut( prime_composition_array ) {
-        let squares = [];
-        let primes_and_powers = new Map();
-        let temporary_array = prime_composition_array;
-        let square_about_to_get_out = 1;
-        primes_and_powers.set( 1, 1 );
+class RealRoots extends ICanHazRootz {
+        constructor(  second_dgr_coef, first_dgr_coef, constant_coef ) {
+                super(  second_dgr_coef, first_dgr_coef, constant_coef );
+                
+                this.single_root = false;
+                this.solved = false;
+                this.discriminant = Math.pow( this.fst_dgr_coef, 2 ) - 4 * this.snd_dgr_coef * this.cnst_coef;
+                this.first_solution = "";
+                this.second_solution = "";
 
-        do {
-                let prime_to_check = temporary_array.splice( 0, 1 );
-                if ( temporary_array.indexOf( Number( prime_to_check ) ) != -1 ) {
-                        if ( primes_and_powers.has( Number( prime_to_check ) ) ) {
-                                let indexer = primes_and_powers.get( Number(prime_to_check ) );
-                                let temporary_indexer = Number( indexer );
-                                temporary_indexer++;
-                                primes_and_powers.set( Number( prime_to_check ), temporary_indexer );
+                if ( this.fst_dgr_coef == 0 ) {
+                        if ( constant_coef == 0 ) {
+                                this.single_root = true;
+                                this.solution = "0";
+                                this.solved = true;
+                        }
+                }
+
+                if ( this.discriminant == 0 ) {
+                        this.single_root = true;
+                        let gcd_fst_2snd = this.greatestCommonDivisor( Math.abs( this.fst_dgr_coef), 2 * Math.abs( this.snd_dgr_coef ) );
+                        let nominator = this.fst_dgr_coef / gcd_fst_2snd;
+                        let denominator = this.snd_dgr_coef / gcd_fst_2snd;
+
+                        if ( nominator % denominator == 0 ) {
+                                this.solution = nominator / denominator;
                         }
                         else {
-                                primes_and_powers.set( Number( prime_to_check ) , 2 );
+                                let sign = ( Math.sign( nominator ) * Math.sign( denominator ) == -1 ) ? "-" : "";
+                                this.solution = sign + "{" + Math.abs( nominator ) + "\\over " + Math.abs( denominator ) + "}";
+                        }
+                        this.solved = true;
+                }
+
+                if ( this.cnst_coef == 0 && !this.single_root ) {
+                        this.first_solution = "0";
+                        if ( this.fst_dgr_coef % this.snd_dgr_coef == 0 ) {
+                                this.second_solution += (-1) * this.fst_dgr_coef / this.snd_dgr_coef;
+                        }
+                        else {
+                               let gcd_fst_2snd = this.greatestCommonDivisor( Math.abs( this.fst_dgr_coef), Math.abs( this.snd_dgr_coef ) );
+                               let sign = ( Math.sign( this.fst_dgr_coef ) * Math.sign( this.snd_dgr_coef ) * ( -1 ) == -1 ) ? "-" : "";
+                               this.second_solution = sign + "{" + Math.abs( this.fst_dgr_coef ) / gcd_fst_2snd + "\\over " + Math.abs( this.snd_dgr_coef ) / gcd_fst_2snd + "}";
+                        }
+                        this.solved = true;
+                }
+                 
+        }
+
+        getRoots() {
+
+                if ( this.solved ) {
+                        return;
+                }
+
+                if ( this.inside_root == 1 ) {
+                        let gcd_first_nom_dem = this.greatestCommonDivisor( Math.abs( (-1) * this.fst_dgr_coef + Math.sqrt( this.to_outside_root ) ) , 2 * Math.abs( this.snd_dgr_coef ) );
+                        let gcd_second_nom_dem = this.greatestCommonDivisor( Math.abs( (-1) * this.fst_dgr_coef - Math.sqrt( this.to_outside_root )), 2 * Math.abs( this.snd_dgr_coef ) );
+                        let first_nominator = ( (-1) * this.fst_dgr_coef + Math.sqrt( this.to_outside_root ) )/ gcd_first_nom_dem;
+                        let second_nominator = ( (-1) * this.fst_dgr_coef - Math.sqrt( this.to_outside_root ) ) / gcd_second_nom_dem;
+                        let denominator_first = 2 * this.snd_dgr_coef / gcd_first_nom_dem;
+                        let denominator_second = 2 * this.snd_dgr_coef / gcd_second_nom_dem;
+                        let first_sign = ( Math.sign( first_nominator ) * Math.sign( denominator_first ) == -1 ) ? "-" : "";
+                        let second_sign = ( Math.sign( second_nominator ) * Math.sign( denominator_second ) == -1 ) ? "-" : "";
+                         
+
+                        if ( Math.abs( denominator_first ) == 1 ) {
+                               this.first_solution = first_sign + Math.abs( first_nominator );
+                        }
+                        else {
+                               this.first_solution = first_sign + "{" + Math.abs( first_nominator ) + "\\over " + Math.abs( denominator_first ) + "}";
+                        }
+
+                        if ( Math.abs( denominator_second ) == 1 ) {
+                               this.second_solution = second_sign + Math.abs( second_nominator );
+                        }
+                        else {
+                               this.second_solution = second_sign + "{" + Math.abs( second_nominator ) + "\\over " + Math.abs( denominator_second ) + "}";
+                        }
+                        
+                        return;
+                }
+
+                let outside_sqrt = Math.sqrt( this.to_outside_root );
+                let gcd_out_root_fst_dgr = this.greatestCommonDivisor( Math.abs( this.fst_dgr_coef ), outside_sqrt );
+                let gcd_top_bottom = ( this.fst_dgr_coef == 0 ) ? this.greatestCommonDivisor( outside_sqrt, 2 * Math.abs( this.snd_dgr_coef ) ) : this.greatestCommonDivisor( gcd_out_root_fst_dgr, 2 * Math.abs( this.snd_dgr_coef ) );
+                let denominator = Math.abs( 2 * this.snd_dgr_coef ) / gcd_top_bottom;
+                let root_multiplier = outside_sqrt / gcd_top_bottom;
+                let fst_dgr_multip = ( this.fst_dgr_coef == 0 ) ? 0 : Math.abs( this.fst_dgr_coef ) / gcd_top_bottom;
+                let sign = ( Math.sign( (-1) * this.fst_dgr_coef ) * Math.sign( this.snd_dgr_coef ) == -1 ) ? "-" : "";
+
+                if ( root_multiplier == 1 ) {
+                        if ( denominator == 1 ) {
+                                this.first_solution = ( fst_dgr_multip == 0 ) ?  "\\sqrt{" + this.inside_root + "}" : sign + fst_dgr_multip + " + \\sqrt{" + this.inside_root + "}";
+                                this.second_solution = ( fst_dgr_multip ==  0 ) ?  "-\\sqrt{" + this.inside_root + "}" : sign + fst_dgr_multip + " - \\sqrt{" + this.inside_root + "}";
+
+                        }
+                        else {
+                                let ans_string_first = ( fst_dgr_multip == 0 ) ?  "{ \\sqrt{" + this.inside_root + "}" : sign + "{" + fst_dgr_multip + " + \\sqrt{" + this.inside_root + "}";
+                                let ans_string_second = ( fst_dgr_multip == 0 ) ?  "-{ \\sqrt{" + this.inside_root + "}" : sign + "{" + fst_dgr_multip + " - \\sqrt{" + this.inside_root + "}";
+ 
+ 
+                                this.first_solution =  ans_string_first + "\\over " + denominator + "}";
+                                this.second_solution =  ans_string_second + "\\over " + denominator + "}";
+                        }
+
+                        return;
+                }
+                
+                if ( denominator == 1 ) {
+                        let ans_string_first = ( fst_dgr_multip == 0 ) ? root_multiplier + " + " : sign + fst_dgr_multip + " + " + root_multiplier;
+                        let ans_string_second = ( fst_dgr_multip == 0 ) ? root_multiplier + " - " : sign + fst_dgr_multip + " - " + root_multiplier; 
+                        this.first_solution =  ans_string_first + "\\sqrt{" + this.inside_root + "}";
+                        this.second_solution = ans_string_second + "\\sqrt{" + this.inside_root + "}";
+                }
+                else {
+                        let ans_string_first = ( fst_dgr_multip == 0 ) ? "{" + root_multiplier : sign + "{" + fst_dgr_multip + " + " + root_multiplier;
+                        let ans_string_second = ( fst_dgr_multip == 0 ) ? "-{" + root_multiplier : sign + "{" + fst_dgr_multip + " - " + root_multiplier;    
+                        this.first_solution = ans_string_first + "\\sqrt{" + this.inside_root + "} \\over " + denominator + "}";
+                        this.second_solution = ans_string_second + "\\sqrt{" + this.inside_root + "} \\over " + denominator + "}";
+                }
+        }
+}
+
+class ComplexRoots extends ICanHazRootz {
+        constructor(  second_dgr_coef, first_dgr_coef, constant_coef ) {
+                super(  second_dgr_coef, first_dgr_coef, constant_coef );
+        
+                this.single_root = false;
+                this.solved = false;
+                this.first_solution = "";
+                this.second_solution = "";
+                this.real_part = "";
+                this.complex_part = "";
+
+                if ( this.fst_dgr_coef != 0 ) {
+                        let gcd_fst_2snd = this.greatestCommonDivisor( Math.abs( this.fst_dgr_coef ), 2 * Math.abs( this.snd_dgr_coef ));
+                        let nominator = this.fst_dgr_coef / gcd_fst_2snd;
+                        let denominator = 2 * this.snd_dgr_coef / gcd_fst_2snd;
+                        let sign = ( Math.sign( (-1) * nominator ) * Math.sign( denominator ) == -1 ) ? "-" : "";
+
+                        if ( Math.abs( denominator ) == 1 ) {
+                                this.real_part = sign + Math.abs( nominator );
+                        }
+                        else {
+                                this.real_part = sign + "{" + Math.abs( nominator ) + " \\over " + Math.abs( denominator ) + "}";
                         }
                 }
         }
-        while ( temporary_array.length > 0 );
-        let indexer = primes_and_powers.keys();
 
-        for ( let primes of indexer ) {
-                if ( primes_and_powers.get( primes ) % 2 != 0 ) {
-                        let power = primes_and_powers.get( primes );
-                        power--;
-                        primes_and_powers.set( Number( primes ), power );
+        getRoots() {
+
+                let outside_sqrt = Math.sqrt( this.to_outside_root );
+                let gcd_out_sqrt_snd = this.greatestCommonDivisor( outside_sqrt, 2 * Math.abs( this.snd_dgr_coef ) );
+                let denominator = 2 * Math.abs( this.snd_dgr_coef ) / gcd_out_sqrt_snd;
+                let nominator = outside_sqrt / gcd_out_sqrt_snd;
+
+                if ( denominator == 1 ) {
+                        if ( this.inside_root == 1 ) {
+                                this.complex_part = ( outside_sqrt == 1 ) ? "i" : ( nominator == 1 ) ? "i" : nominator + "i";
+                        }
+                        else {
+                                this.complex_part = ( nominator == 1 ) ? " \\sqrt{" + this.inside_root + "}i" : nominator + " \\sqrt{" + this.inside_root + "}i";
+                        }
+
+                        this.solved = true;
                 }
-        }
-        let indexer2 = primes_and_powers.keys();
-        for ( let primes of indexer2 ) {
-                square_about_to_get_out *= Math.pow( primes, primes_and_powers.get( Number( primes )) );
-        }
 
-        return square_about_to_get_out;
+                if ( nominator == 1 && !this.solved ) {
+                        if ( this.inside_root == 1 ) {
+                                this.complex_part = "{ 1 " +  "\\over " + denominator + "}i";
+                        }
+                        else {
+                                this.complex_part = "{ \\sqrt{" + this.inside_root + "}\\over " + denominator + "}i";
+                        }
+
+                        this.solved = true;
+                }
+
+                if ( !this.solved ) {
+                        if ( this.inside_root == 1 ) {
+                                this.complex_part = "{" + nominator + "\\over " + denominator + "}i";
+                        }
+                        else {
+                                this.complex_part = "{" + nominator + "\\sqrt{" + this.inside_root + "} \\over " + denominator + "}i";
+                        }
+
+                        this.solved = true;
+                }
+                                
+                this.first_solution = ( this.real_part.length == 0 ) ? this.complex_part : this.real_part + "+ " + this.complex_part;
+                this.second_solution = ( this.real_part.length == 0 ) ? "-" + this.complex_part : this.real_part + "-" + this.complex_part;
+
+        } 
 }
-        
-        
-function getroots() {
 
+function getroots() {
+// If the user gives all integer coefficients we will give him exact answer, otherwise he will get in most cases approximate answer.
         var second_dgr_coef = Number( document.getElementById( "second_dgr" ).value );
         var first_dgr_coef = Number( document.getElementById( "first_dgr" ).value );
         var constant_coef = Number( document.getElementById( "constant_dgr" ).value );
@@ -111,9 +317,6 @@ function getroots() {
         var complex = false;
         var roots = [];
         var we_have_integers = false;
-        var second_dgr_comp, first_dgr_comp;
-        var square_from_discriminant;
-        var gcd_second_first, gcd_first_dis_sqr, gcd_second_dis_sqr, gcd_outside_sqrt_first_dgr, gcd_top_bottom, inside_sqrt_root, outside_sqrt_root;
         
         if ( second_dgr_coef == 0 ) {
                 solution_field.innerHTML = "Coefficient a cannot be 0!";
@@ -123,192 +326,58 @@ function getroots() {
                 solution_field.innerHTML = "Please use numbers only!";
                 return 1;
         }
-                          
-// If the user gives all integer coefficients for the second degree polynomial the program will give an exact answer for the root instead of
-// approximate values when he uses decimal numbers.       
+
         if ( Number.isInteger( second_dgr_coef ) && Number.isInteger( first_dgr_coef ) && Number.isInteger( constant_coef ) ) {
                 we_have_integers = true;
-                square_from_discriminant = getSquaresOut( primeComposition( Math.abs(discriminant) ) );
-                gcd_second_first = greatestCommonDivisor( 2 * Math.abs( second_dgr_coef ), Math.abs( first_dgr_coef ) );
-                gcd_first_dis_sqr = greatestCommonDivisor( Math.abs( first_dgr_coef ), Math.sqrt( square_from_discriminant ) );
-                gcd_second_dis_sqr = greatestCommonDivisor( 2 * Math.abs( second_dgr_coef ), Math.sqrt( square_from_discriminant ) );
-                inside_sqrt_root = Math.abs( discriminant ) / square_from_discriminant;
-                outside_sqrt_root = Math.sqrt( square_from_discriminant );
-                gcd_outside_sqrt_first_dgr = greatestCommonDivisor( Math.abs( outside_sqrt_root ), Math.abs( first_dgr_coef ) );
-                if ( first_dgr_coef != 0 ){
-                        gcd_top_bottom = greatestCommonDivisor( gcd_outside_sqrt_first_dgr, 2 * Math.abs( second_dgr_coef ) );
-                }
-                else {
-                        gcd_top_bottom = greatestCommonDivisor( outside_sqrt_root, 2 * Math.abs( second_dgr_coef ) );
-                }
-
         }
-
-       if ( discriminant < 0 ) {
+       
+        if ( discriminant < 0 ) {
                 complex = true;
                 
                 if ( !we_have_integers ) {
                        discriminant_root = Math.sqrt( Math.abs( discriminant ) );
-                }
-                else {
-                       discriminant_root = Math.abs( inside_sqrt_root );
-                }
-       }
-       else {
+                }       
+        }       
+        else {
                if ( !we_have_integers ) {
                        discriminant_root = Math.sqrt( discriminant );
-               }
-               else {
-                       discriminant_root = inside_sqrt_root;
-               }
-      
-       }
-
-
-
-       if ( complex ) {
-
-               if ( !we_have_integers ) {
-                       roots.push( ( - first_dgr_coef ) / ( 2 * second_dgr_coef ) );
-                       roots.push( discriminant_root / ( 2 * second_dgr_coef ) );
-                       let real_part_first = ( roots[0] != 0 ) ? roots[0] + " + ": "" ;
-                       let real_part_second = ( roots[0] != 0 ) ? roots[0] : "" ;
-                       solution_field.innerHTML = "$$ x = \\begin{cases} &" + real_part_first + Math.abs( roots[1] ) + "i \\"+"\\ \\ &" + real_part_second + " - " + Math.abs( roots[1] ) + "i \\end{cases} $$";
-               }
-               else {
-               //We are here because user entered integers only. Reason for making four if statements here is to get rid of situations where we 1 inside the square root and to get the
-               //signs appear correctly. Statement ( ( inside_sqrt_root == 1) ? "1" : "\\sqrt{" + inside_sqrt_root + "}" ) checks if we're trying to display square root of one and replaces
-               //the square root with number one. Also we don't to 1 to appear as a denominator. Next time I'll plan before starting to code. 
-                       let first_sign = ( (first_dgr_coef > 0 && second_dgr_coef > 0) || (first_dgr_coef < 0 && second_dgr_coef < 0) ) ? "-":"";
-                       let second_sign = ( second_dgr_coef < 0 ) ? "-":"";
-                       let second_fraction = ( (2 * Math.abs( second_dgr_coef ) ) / gcd_second_dis_sqr == 1 ) ? 0:1;
-                       let first_fraction = ( Math.abs( 2 * second_dgr_coef ) / gcd_second_first == 1 ) ? 0:1;
-                       let square_root_multiplier = ( outside_sqrt_root / gcd_second_dis_sqr == 1 ) ? "": "" + outside_sqrt_root / gcd_second_dis_sqr + "" ;
-                       console.log( "first fraction and second fraction are " + first_fraction + " " + second_fraction );
-                       if ( first_dgr_coef == 0 && inside_sqrt_root != 1 ) {
-                               solution_field.innerHTML = "$$ x = \\begin{cases} &" + ( ( second_fraction == 1 ) ? "{" + square_root_multiplier + "\\sqrt{" +  inside_sqrt_root + "} \\over " + Math.abs( 2 * second_dgr_coef) / gcd_second_dis_sqr + "}i " : square_root_multiplier + "\\sqrt{" + inside_sqrt_root + "}i " ) + "\\" + "\\ \\ &  " + ( ( second_fraction == 1 ) ? "-{" + square_root_multiplier + "\\sqrt{" +  inside_sqrt_root + "} \\over " + Math.abs( 2 * second_dgr_coef) / gcd_second_dis_sqr + "}i " : "-" + square_root_multiplier + "\\sqrt{" +  inside_sqrt_root + " }i " ) + "\\end{cases}$$";
-                               return;
-                       }
-                       if ( first_dgr_coef == 0 && inside_sqrt_root == 1 ) {
-                               solution_field.innerHTML = "$$ x = \\begin{cases} &" + ( ( second_fraction == 1 ) ? "{" + ( ( square_root_multiplier == "" ) ? "1" : square_root_multiplier ) +  " \\over " + Math.abs( 2 * second_dgr_coef) / gcd_second_dis_sqr + "}i" : square_root_multiplier + "i" ) + "\\" + "\\ \\ & " + ( ( second_fraction == 1 ) ? "-{" + (( square_root_multiplier == "" ) ? "1" : square_root_multiplier ) + " \\over " + Math.abs( 2 * second_dgr_coef) / gcd_second_dis_sqr + "}i" : "-" + square_root_multiplier + "i" ) + "\\end{cases}$$";
-                               return;
-                       }
-                       if ( first_fraction == 0 && second_fraction != 0 ) {
-                               solution_field.innerHTML = "$$ x = \\begin{cases} & " + first_sign + ( Math.abs(first_dgr_coef / gcd_second_first )) + " + " + "{" + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "1" : "\\sqrt{" + inside_sqrt_root + "}" ) +  "\\over " + Math.abs((2 * second_dgr_coef) / gcd_second_dis_sqr ) + "}i \\" + "\\ \\ & " + first_sign +  Math.abs( first_dgr_coef / gcd_second_first )  + " - {" + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "1" : "\\sqrt{" + inside_sqrt_root + "}" ) +  " \\over " + Math.abs( (2 * second_dgr_coef) / gcd_second_dis_sqr ) + "}i " + "\\end{cases} $$";
-                       }
-                       if ( first_fraction == 0 && second_fraction == 0 ) {
-                               solution_field.innerHTML = "$$ x = \\begin{cases} & " + first_sign + ( Math.abs(first_dgr_coef / gcd_second_first )) + " + " + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "" : "\\sqrt{" + inside_sqrt_root + "}" ) + "i \\" + "\\ \\ & " + first_sign +  Math.abs( first_dgr_coef / gcd_second_first )  + " - " + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "" : "\\sqrt{" + inside_sqrt_root + "}" ) + "i  \\end{cases} $$";
-                       }
-                       if ( first_fraction != 0 && second_fraction == 0 ) {
-                               solution_field.innerHTML = "$$ x = \\begin{cases} & " + first_sign + "{" + ( Math.abs(first_dgr_coef / gcd_second_first )) + "\\over " + Math.abs( 2 * second_dgr_coef ) / gcd_second_first + "} + " + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "" : "\\sqrt{" + inside_sqrt_root + "}" ) + " i \\" + "\\ \\ & {" + first_sign +  Math.abs( first_dgr_coef / gcd_second_first )  + "\\over " +  Math.abs( 2 * second_dgr_coef ) / gcd_second_first + "} - " + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "" : "\\sqrt{" + inside_sqrt_root + "}" ) +" i " + "\\end{cases} $$";
-                       }
-                       if ( first_fraction == 1 && second_fraction == 1 ) {
-                               solution_field.innerHTML = "$$ x = \\begin{cases} & " + first_sign + "{" + ( Math.abs(first_dgr_coef / gcd_second_first )) + "\\over " + Math.abs( 2 * second_dgr_coef ) / gcd_second_first + "} + {" + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "1" : "\\sqrt{" + inside_sqrt_root + "}" ) +" \\over " + Math.abs((2 * second_dgr_coef) / gcd_second_dis_sqr ) + "}i \\" + "\\ \\ & " + first_sign +"{"  + Math.abs( first_dgr_coef / gcd_second_first )  + "\\over " + Math.abs( 2 * second_dgr_coef ) / gcd_second_first + "} - {" + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "1" : "\\sqrt{" + inside_sqrt_root + "}" ) + "\\over " + Math.abs( (2 * second_dgr_coef) / gcd_second_dis_sqr ) + "}i " + "\\end{cases} $$";
-                       }
-
-  
-               }
-       }
-       else {
-               
-               if ( !we_have_integers ) {
-                       roots.push( (( -first_dgr_coef ) + discriminant_root ) / ( 2 * second_dgr_coef ) );
-                       roots.push( (( -first_dgr_coef ) - discriminant_root ) / ( 2 * second_dgr_coef ) );
+               }      
+        }
+// Lets first deal with the case when user inputs decimal numbers.
+        if ( complex && !we_have_integers ) {
+                roots.push( ( - first_dgr_coef ) / ( 2 * second_dgr_coef ) );
+                roots.push( discriminant_root / ( 2 * second_dgr_coef ) );
+                let real_part_first = ( roots[0] != 0 ) ? roots[0] + " + ": "" ;
+                let real_part_second = ( roots[0] != 0 ) ? roots[0] : "" ;
+                solution_field.innerHTML = "$$ x = \\begin{cases} &" + real_part_first + Math.abs( roots[1] ) + "i \\"+"\\ \\ &" + real_part_second + " - " + Math.abs( roots[1] ) + "i \\end{cases} $$";
+                return;
+        }
+        else if ( !we_have_integers ) {
+                roots.push( (( -first_dgr_coef ) + discriminant_root ) / ( 2 * second_dgr_coef ) );
+                roots.push( (( -first_dgr_coef ) - discriminant_root ) / ( 2 * second_dgr_coef ) );
                        
-                       if ( roots[0] != roots[1] ) {
-                               solution_field.innerHTML = "$$ x = \\begin{cases} &" + roots[0] + "\\" + "\\ &" + roots[1] + "\\end{cases} $$";
-                       }
-                       else {
-                               solution_field.innerHTML  = "\\(x = " + roots[0] + "\\)";
-                       }
-               }
-               else {
-                       let first_sign = ( (first_dgr_coef > 0 && second_dgr_coef > 0) || (first_dgr_coef < 0 && second_dgr_coef < 0) ) ? "-":"";
-                       let second_sign = ( second_dgr_coef < 0 ) ? "-":"";
-                       let second_fraction = ( (2 * Math.abs( second_dgr_coef ) ) / gcd_second_dis_sqr == 1 ) ? 0:1;
-                       let first_fraction = ( Math.abs( 2 * second_dgr_coef ) / gcd_second_first == 1 ) ? 0:1;
-                       let square_root_multiplier = ( outside_sqrt_root / gcd_top_bottom == 1 ) ? "": "" + outside_sqrt_root / gcd_second_dis_sqr + "" ;
-                       let denominator = ( Math.abs( 2 * second_dgr_coef ) / gcd_top_bottom == 1 ) ? 0:1;
-                       
-                       if ( discriminant == 0 ){
-                               if ( ( 2 * Math.abs( second_dgr_coef ) )/ gcd_second_first  != 1 && ( first_dgr_coef != 0 || constant_coef != 0 ) ) {
-                                       solution_field.innerHTML = "$$ x = {" + ( - first_dgr_coef / gcd_second_first ) + "\\over " + ( 2 * second_dgr_coef / gcd_second_first ) + "}$$";
-                               }
-                               else if ( first_dgr_coef == 0 && constant_coef == 0 ) {
-                                       solution_field.innerHTML = "$$ x = 0 $$";
-                               }
-                               else {
-                                       solution_field.innerHTML = "$$ x = " + ( - first_dgr_coef / gcd_second_first ) + " $$";
-                               }  
-                       }
-                       else if ( constant_coef == 0 ) {
-                               if ( (2 * Math.abs( second_dgr_coef ) ) / greatestCommonDivisor( 2 * Math.abs( first_dgr_coef ), 2 * Math.abs(second_dgr_coef ) ) != 1 ) {
-                                       solution_field.innerHTML = "$$ x = \\begin{cases} & 0 \\" + "\\ & " + first_sign + "{" + ( 2 * Math.abs( first_dgr_coef ) / greatestCommonDivisor( 2 * Math.abs( first_dgr_coef ), 2 * Math.abs(second_dgr_coef ) ) ) + " \\over " +  Math.abs( 2 * second_dgr_coef)  / greatestCommonDivisor( 2 * Math.abs( first_dgr_coef ), 2 * Math.abs(second_dgr_coef ) ) + "}\\end{cases} $$";
-                               }
-                               else {
-                                       solution_field.innerHTML = "$$ x = \\begin{cases} & 0 \\" + "\\ & " + first_sign  + ( Math.abs( first_dgr_coef )/ greatestCommonDivisor( first_dgr_coef, second_dgr_coef ) ) + "\\end{cases} $$";
-                               } 
+                if ( roots[0] != roots[1] ) {
+                        solution_field.innerHTML = "$$ x = \\begin{cases} &" + roots[0] + "\\" + "\\ &" + roots[1] + "\\end{cases} $$";
+                }
+                else {
+                        solution_field.innerHTML  = "\\(x = " + roots[0] + "\\)";
+                }
+                
+                return;
+        }
+// If we have complex roots use ComplexRoots otherwise RealRoots
+        var Polynom = ( !complex ) ? new RealRoots( second_dgr_coef, first_dgr_coef, constant_coef ) : new ComplexRoots( second_dgr_coef, first_dgr_coef, constant_coef );
 
-                       }
-                       else {
-                               let gcd_top_sum_denominator = greatestCommonDivisor( Math.abs( (  -first_dgr_coef ) + outside_sqrt_root ), 2 * Math.abs( second_dgr_coef ) );
-                               let gcd_top_sum_den_second = greatestCommonDivisor( ( Math.abs( (  -first_dgr_coef ) - outside_sqrt_root ), 2 * Math.abs( second_dgr_coef ) ) );
-                               let no_sqrt_denom = Math.abs( 2 * second_dgr_coef ) / gcd_top_sum_denominator;
-                               let nominator_sum_first = ( inside_sqrt_root == 1 ) ?  -first_dgr_coef  + outside_sqrt_root : 0;
-                               let nominator_sum_second = ( inside_sqrt_root == 1 ) ?  -first_dgr_coef  - outside_sqrt_root : 0;
-                               let nominator_first = nominator_sum_first / gcd_top_sum_denominator;
-                               let nominator_second = nominator_sum_second / gcd_top_sum_den_second;
-                               let below_nominator_first = ( 2 * Math.abs( second_dgr_coef ) ) / gcd_top_sum_denominator;
-                               let below_nominator_second = ( 2 * Math.abs( second_dgr_coef ) ) / gcd_top_sum_den_second; 
-                               let first_sign_nom = Math.sign( nominator_first ) * Math.sign(  2 * second_dgr_coef  / gcd_top_sum_denominator );
-                               let second_sign_nom = Math.sign( nominator_second ) * Math.sign(  2 * second_dgr_coef  / gcd_top_sum_denominator );
-                               let first_sign_to_place = ( first_sign_nom == -1 ) ? "-":"";
-                               let second_sign_to_place = ( second_sign_nom == -1 ) ? "-":""; 
-                               
-                              
-                               if ( first_dgr_coef == 0 && constant_coef != 0 ) {
-                                       let first_string_to_enter, second_string_to_enter;
-                                       first_string_to_enter = ( Math.abs( 2 * second_dgr_coef ) / gcd_top_bottom == 1 ) ? square_root_multiplier + ( ( inside_sqrt_root == 1) ? "" : "\\sqrt{" + inside_sqrt_root + "}" ) : "{" + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "" : "\\sqrt{" + inside_sqrt_root + "}" ) + "\\over " + ( Math.abs( 2 * second_dgr_coef ) / gcd_top_bottom ) + "}";
-                                       second_string_to_enter = ( Math.abs( 2 * second_dgr_coef ) / gcd_top_bottom == 1 ) ? "-" +  square_root_multiplier + ( ( inside_sqrt_root == 1) ? "" : "\\sqrt{" + inside_sqrt_root + "}" ) : "-{" + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "" : "\\sqrt{" + inside_sqrt_root + "}" ) + "\\over " + ( Math.abs(2 * second_dgr_coef ) / gcd_top_bottom ) + "}";
+        Polynom.getRoots();
 
-                                       solution_field.innerHTML = "$$ x = \\begin{cases} &" + first_string_to_enter + "\\" + "\\ &" + second_string_to_enter +  "\\end{cases}$$";
-                                       return;
-                               }
-
-                               if ( denominator == 1 ) {
-                                       if ( inside_sqrt_root == 1 ) {
-                                               let gcd_nom_first = greatestCommonDivisor( Math.abs( nominator_first ), below_nominator_first );
-                                               let gcd_nom_second = greatestCommonDivisor( Math.abs( nominator_second ), below_nominator_second );
-                                               let new_nominator_first = nominator_first / gcd_nom_first;
-                                               let new_nominator_second = nominator_second / gcd_nom_second;
-                                               let new_below_nominator_first = below_nominator_first / gcd_nom_first;
-                                               let new_below_nominator_second = below_nominator_second / gcd_nom_second;
-                                               let first_string_to_enter = ( new_below_nominator_first == 1 ) ? Math.sign( second_dgr_coef ) * new_nominator_first : first_sign_to_place + "{" + Math.abs( new_nominator_first ) + "\\over " +new_below_nominator_first + "}";
-                                               let second_string_to_enter = ( new_below_nominator_second == 1 ) ? Math.sign( second_dgr_coef ) * new_nominator_second : second_sign_to_place + "{" + Math.abs( new_nominator_second ) + "\\over " + new_below_nominator_second + "}";
-
-                                               solution_field.innerHTML = "$$ x = \\begin{cases} & " + first_string_to_enter + "\\" + "\\ &" + second_string_to_enter + "\\end{cases} $$";
-
-                                       }
-                                       else {
-                                       solution_field.innerHTML = "$$ x = \\begin{cases} &" + first_sign + " {" + ( Math.abs( first_dgr_coef ) / gcd_top_bottom ) + " + " + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "1" : "\\sqrt{" + inside_sqrt_root + "}" ) + "\\over " + ( Math.abs(2 * second_dgr_coef ) / gcd_top_bottom ) + "} \\" + "\\ &" + first_sign + "{" + ( Math.abs(first_dgr_coef) / gcd_top_bottom ) + " - " + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "1" : "\\sqrt{" + inside_sqrt_root + "}" ) + "\\over " + ( 2 * Math.abs( second_dgr_coef ) / gcd_top_bottom ) + "}\\end{cases}$$";
-                                       }
-                               }
-                               else if ( inside_sqrt_root == 1 ) {
-                                       let gcd_nom_first = greatestCommonDivisor( Math.abs( nominator_first ), below_nominator_first );
-                                       let gcd_nom_second = greatestCommonDivisor( Math.abs( nominator_second ), below_nominator_second );
-                                       console.log("Here " + outside_sqrt_root + " " + first_dgr_coef + gcd_nom_second);
-                                       solution_field.innerHTML = "$$ x = \\begin{cases} &" +  Math.sign( second_dgr_coef ) * ( ( -first_dgr_coef )  + outside_sqrt_root ) / gcd_top_bottom   +  " \\" + "\\ &" + Math.sign( second_dgr_coef ) * ( ( -first_dgr_coef) - outside_sqrt_root ) / gcd_nom_second  + " \\end{cases}$$";
-                               }
-                               else {
-                                       solution_field.innerHTML = "$$ x = \\begin{cases} &" + first_sign  + ( Math.abs( first_dgr_coef ) / gcd_top_bottom ) + " + " + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "" : "\\sqrt{" + inside_sqrt_root + "}" )  +  " \\" + "\\ &" + first_sign + ( Math.abs(first_dgr_coef) / gcd_top_bottom ) + " - " + square_root_multiplier + ( ( inside_sqrt_root == 1) ? "" : "\\sqrt{" + inside_sqrt_root + "}" ) + " \\end{cases}$$";
-                               }
-                       }
-
-               }
-       } 
-
-
+        if ( Polynom.single_root ) {
+                solution_field.innerHTML = "$$ x = " + Polynom.solution + "$$";
+        }
+        else {
+                solution_field.innerHTML = "$$ x = \\begin{cases} &" + Polynom.first_solution + "\\" + "\\ & " + Polynom.second_solution + "\\end{cases} $$";
+        } 
 }
+
 
 function numbersystable( action ) {
         var indexer;

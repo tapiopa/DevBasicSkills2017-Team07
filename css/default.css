@@ -76,7 +76,7 @@ select {
 
 .number_table {
     background-color: white;
-    width; 200px;
+    width: 200px;
     text-align: center;
     margin-left: 80px;
 }
@@ -86,16 +86,16 @@ select {
 }
 
 .column:first-child {
-    margin-right: 60px;
+    margin-right: 0px;
     margin-left: 0px;
 }
 
-.column:nth-child(2) {
-    margin-left: 0px;
+.column:nth-of-type(2) {
+    margin-right: 0px;
 }
 
 .scroll_box {
-    width: 575px;
+    width: 510px;
     height: 600px;
     overflow: auto;
 }
