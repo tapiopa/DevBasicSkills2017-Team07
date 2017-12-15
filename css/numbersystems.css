@@ -1,23 +1,18 @@
 div.numsysinputgroup {
 	float: left;
 	width: 550px;
-	/*border: 1px solid red;*/
 	display: inline;
 	font-size: 16px;
 	margin-bottom: 5px;
 }
 
 div.numsysconvertbutton {
-	/*margin-bottom: 0px;*/
-	/*border: 1px solid blue;*/
-	/*width: 150px;*/
 	display: inline;
 	margin-left: 20px;
 }
 
 div.numsysinput {
 	width: 430px;
-	/*border: 1px solid green;*/
 	display: inline-block;
 }
 
@@ -33,13 +28,10 @@ div.numsysinput input {
 	text-align: right;
 	height: 20px;
 	font-size: 16px;
-	/*border: 3px solid green;*/
 }
 
 div#numsysresetbutton {
-	/*clear: both;*/
 	margin-top: 20px;
-	/*margin-left: 25px;*/
 }
 
 p.footertext {

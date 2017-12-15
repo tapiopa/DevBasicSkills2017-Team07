@@ -1,14 +1,18 @@
-//Fill truth values for 'NOT' operation, check first if basic truth values have been filled
+//Fill truth values for 'NEGATION' operation, check first if basic truth values have been filled
 function doNegation() {
 	checkTruths();
 	document.getElementById("operation").innerHTML = "&not;p";
+	document.getElementById("q1").innerHTML = "";
+	document.getElementById("q2").innerHTML = "";
+	document.getElementById("q3").innerHTML = "";
+	document.getElementById("q4").innerHTML = "";
 	document.getElementById("o1").innerHTML = document.getElementById("p1").innerHTML == "T" ? "F" : "T";
 	document.getElementById("o2").innerHTML = document.getElementById("p2").innerHTML == "T" ? "F" : "T";
 	document.getElementById("o3").innerHTML = document.getElementById("p3").innerHTML == "T" ? "F" : "T";
 	document.getElementById("o4").innerHTML = document.getElementById("p4").innerHTML == "T" ? "F" : "T";			
 }
 
-//Fill truth values for 'AND' operation, check first if basic truth values have been filled
+//Fill truth values for 'CONJUNCTION' operation, check first if basic truth values have been filled
 function doAnd() {
 	checkTruths();
 	document.getElementById("operation").innerHTML = "p &and; q";
@@ -18,7 +22,7 @@ function doAnd() {
 	document.getElementById("o4").innerHTML = document.getElementById("p4").innerHTML == "T" && document.getElementById("q4").innerHTML == "T" ? "T" : "F";
 }
 
-//Fill truth values for 'OR' operation, check first if basic truth values have been filled
+//Fill truth values for 'DISJUNCTION' operation, check first if basic truth values have been filled
 function doOr() {
 	checkTruths();
 	document.getElementById("operation").innerHTML = "p &or; q";
@@ -28,7 +32,7 @@ function doOr() {
 	document.getElementById("o4").innerHTML = document.getElementById("p4").innerHTML == "T" || document.getElementById("q4").innerHTML == "T" ? "T" : "F";
 }
 
-//Fill truth values for 'XOR' operation, check first if basic truth values have been filled
+//Fill truth values for 'EXCLUSIVE DISJUNCTION' operation, check first if basic truth values have been filled
 function doXor() {
 	checkTruths();
 	document.getElementById("operation").innerHTML = "p &oplus; q";
@@ -101,7 +105,7 @@ function truthtablereset() {
 
 //Check if basic truth values have been filled and fill them if they are empty (checks only one truth value, really)
 function checkTruths() {
-	if (document.getElementById("p1").innerHTML != "T") {
+	if (document.getElementById("q1").innerHTML != "T") {
 		fillTruths();
 	}
 }

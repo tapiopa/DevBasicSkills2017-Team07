@@ -5,20 +5,16 @@ canvas {
 }
 
 div.rand {
-	/*width: 125px;*/
 	margin-left: 10px;
 	float: left;
 	margin-bottom: 10px;
-	/*border: green solid 2px;*/
 }
 
 div.rand input {
-	/*float: right;*/
 	width: 50px;
 	margin-left: 10px;
 }
 
 div#randbutton {
 	float: right;
-
 }
