@@ -1,4 +1,4 @@
-//Fill truth values for 'NOT' operation, check first if basic truth values have been filled
+//Fill truth values for 'NEGATION' operation, check first if basic truth values have been filled
 function doNegation() {
 	checkTruths();
 	document.getElementById("operation").innerHTML = "&not;p";
@@ -8,7 +8,7 @@ function doNegation() {
 	document.getElementById("o4").innerHTML = document.getElementById("p4").innerHTML == "T" ? "F" : "T";			
 }
 
-//Fill truth values for 'AND' operation, check first if basic truth values have been filled
+//Fill truth values for 'CONJUNCTION' operation, check first if basic truth values have been filled
 function doAnd() {
 	checkTruths();
 	document.getElementById("operation").innerHTML = "p &and; q";
@@ -18,7 +18,7 @@ function doAnd() {
 	document.getElementById("o4").innerHTML = document.getElementById("p4").innerHTML == "T" && document.getElementById("q4").innerHTML == "T" ? "T" : "F";
 }
 
-//Fill truth values for 'OR' operation, check first if basic truth values have been filled
+//Fill truth values for 'DISJUNCTION' operation, check first if basic truth values have been filled
 function doOr() {
 	checkTruths();
 	document.getElementById("operation").innerHTML = "p &or; q";
@@ -28,7 +28,7 @@ function doOr() {
 	document.getElementById("o4").innerHTML = document.getElementById("p4").innerHTML == "T" || document.getElementById("q4").innerHTML == "T" ? "T" : "F";
 }
 
-//Fill truth values for 'XOR' operation, check first if basic truth values have been filled
+//Fill truth values for 'EXCLUSIVE DISJUNCTION' operation, check first if basic truth values have been filled
 function doXor() {
 	checkTruths();
 	document.getElementById("operation").innerHTML = "p &oplus; q";
